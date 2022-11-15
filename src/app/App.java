@@ -1,3 +1,5 @@
+package app;
+
 import game.Plateau;
 
 public class App {

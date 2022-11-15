@@ -11,8 +11,8 @@ public class Case {
         return stat;
     }
 
-    public void play(int numPlayer){
-        if (numPlayer == 1) this.stat = Stat.WHITE;
+    public void play(Stat pawnColor){
+        if (pawnColor == Stat.WHITE) this.stat = Stat.WHITE;
         else this.stat = Stat.BLACK;
     }
 }
