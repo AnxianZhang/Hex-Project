@@ -6,7 +6,6 @@ import game.Plateau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import game.Stat;
 import org.junit.jupiter.api.Test;
 import player.Identity;
 import player.Player;
@@ -18,7 +17,7 @@ class TestPlateau {
         Plateau p = new Plateau(taille);
 
         Player p1 = Fabrique.makePlayer(Identity.HUMAIN);
-        Player p2 = Fabrique.makePlayer(Identity.HUMAIN);
+        Player p2 = Fabrique.makePlayer(Identity.IA);
 
         assertEquals(taille, p.taille());
 
