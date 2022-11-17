@@ -11,7 +11,7 @@ import player.Identity;
 import player.Player;
 
 class TestPlateau {
-    // test de tout
+    // test de toutes les classes
     @Test
     void test() {
         final int taille = 4;
