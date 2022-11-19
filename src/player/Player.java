@@ -1,5 +1,6 @@
 package player;
 
+import app.IPlayer;
 import game.Stat;
 
 public abstract class Player{
@@ -25,7 +26,7 @@ public abstract class Player{
         return this.pawnColor;
     }
 
-    public int getChoix() {
+    public int getPlayerChoice() {
         return this.choice;
     }
 

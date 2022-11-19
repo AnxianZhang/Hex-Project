@@ -1,9 +1,11 @@
 package game;
 
 import exeption.Unplayable;
+import player.Player;
 
 public class Plateau {
     private final static int MAX_PLAYERS = 2;
+    private int nbOfUsableCase;
     private final int size;
     private final Case[][] tab;
     private static final int MAX_SIZE = 26;
@@ -12,6 +14,7 @@ public class Plateau {
         assert size <= MAX_SIZE && size > 0;
         this.size = size;
         this.tab = new Case[this.size][this.size];
+        this.nbOfUsableCase = this.size * this.size;
 
         initTab();
     }
@@ -26,34 +29,27 @@ public class Plateau {
         return this.tab[line][column].getStat() == Stat.EMPTY;
     }
 
-    /**
-     * A competer / revoir
-     * @return
-     */
-    public boolean ifFull() {
-        boolean p = false;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (isEmpty(i, j)) {
-                    p = true;
-                }
-            }
-        }
-        return p;
+    public boolean isFull() {
+        return this.nbOfUsableCase == 0;
     }
 
     public int taille() {
         return this.size;
     }
 
-    public void play(int numCase, Stat pawnColor) throws Unplayable{
-        if (numCase < 0 || numCase >= Math.pow(this.size, 2))
-            throw new Unplayable();
-
+    public void play(int numCase, Player p) throws Unplayable{
         int line = numCase / this.size;
         int column = numCase % this.size;
-        if (isEmpty(line, column))
-            this.tab[line][column].play(pawnColor);
+
+        if (numCase < 0 || numCase >= Math.pow(this.size, 2) || !isEmpty(line, column))
+            throw new Unplayable();
+
+        this.tab[line][column].play(p.getPawnColor());
+        --nbOfUsableCase;
+    }
+
+    public int getNbOfUsableCase(){
+        return this.nbOfUsableCase;
     }
 
     private String makeSpace(int numLine) {
