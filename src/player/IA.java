@@ -7,7 +7,7 @@ import java.util.Random;
 public class IA extends Player{
     public IA(){
         super(Identity.IA);
-    }
+    }//
 
     /**
      * A modifier mettre une variable static pour le nombre de case utiliser
