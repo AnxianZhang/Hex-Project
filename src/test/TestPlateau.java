@@ -6,20 +6,23 @@ import game.Plateau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import game.Stat;
 import org.junit.jupiter.api.Test;
+import player.IA;
 import player.Identity;
 import player.Player;
 
 class TestPlateau {
     @Test
     void test() {
-        final int taille = 4;
+        final int taille = 4, nbCases = taille * taille;
         Plateau p = new Plateau(taille);
 
-        Player p1 = Fabrique.makePlayer(Identity.HUMAIN);
-        Player p2 = Fabrique.makePlayer(Identity.IA);
-
         assertEquals(taille, p.taille());
+
+        assertEquals(nbCases, p.getNbOfUsableCase());
+
+        assertFalse(p.isFull());
 
         assertEquals(
                 """
@@ -30,8 +33,10 @@ class TestPlateau {
                         4    . . . .
                         """, p.toString());
 
-        p.play(0, p1.getPawnColor());
-        p.play(6, p2.getPawnColor());
+        p.play(0, Stat.WHITE);
+        p.play(6, Stat.BLACK);
+
+        assertEquals(nbCases - 2, p.getNbOfUsableCase());
 
         assertEquals(
                 """
@@ -43,12 +48,36 @@ class TestPlateau {
                         """, p.toString());
 
         assertThrows(Unplayable.class, () -> {
-            p.play(60, p1.getPawnColor());
-            p.play(-99, p2.getPawnColor());
-            p.play(16, p1.getPawnColor());
+            p.play(60, Stat.WHITE);
+            p.play(-99, Stat.BLACK);
+            p.play(16, Stat.WHITE);
+            p.play(0, Stat.BLACK);
         });
 
-        assertTrue(p.isEmpty(10 / p.taille(),  10 % p.taille()));
-        assertFalse(p.isEmpty(6 / p.taille(), 6 % p.taille()));
+        p.play(1, Stat.WHITE);
+        p.play(2, Stat.BLACK);
+        p.play(3, Stat.WHITE);
+        p.play(4, Stat.BLACK);
+        p.play(5, Stat.WHITE);
+        p.play(7, Stat.BLACK);
+        p.play(8, Stat.WHITE);
+        p.play(9, Stat.BLACK);
+        p.play(10, Stat.WHITE);
+        p.play(11, Stat.BLACK);
+        p.play(12, Stat.WHITE);
+        p.play(13, Stat.BLACK);
+        p.play(14, Stat.WHITE);
+        p.play(15, Stat.BLACK);
+
+        assertTrue(p.isFull());
+
+        assertEquals(
+                """
+                         A B C D
+                        1 W W B W
+                        2  B W B B
+                        3   W B W B
+                        4    W B W B
+                        """, p.toString());
     }
 }
