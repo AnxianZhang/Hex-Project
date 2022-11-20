@@ -9,34 +9,6 @@ public class IA extends Player{
         super(Identity.IA);
     }
 
-//    private int choiceRandCase(Plateau p){
-//        Random r = new Random();
-//        int nbOfEmptyCases = 0;
-//        for(int i = 0; i < p.taille(); i++){
-//            for(int j = 0; j < p.taille(); j++){
-//                if(p.isEmpty(i,j))
-//                    ++nbOfEmptyCases;
-//            }
-//        }
-//        return r.nextInt(nbOfEmptyCases);
-//    }
-//
-//    public int setIAChoice(Plateau p){
-//        int nbOfEmptyCases = 0;
-//        int c = choiceRandCase(p);
-//        for(int i=0;i<p.taille();i++){
-//            for(int j=0 ; j<p.taille() ; j++){
-//                if(p.isEmpty(i,j))
-//                    ++nbOfEmptyCases;
-//                if(nbOfEmptyCases == c){
-//                    super.setPlayerChoice(i * p.taille() + j);
-//                    return i * p.taille() + j;
-//                }
-//            }
-//        }
-//        return -1;
-//    }
-
     public void makeChoice(Plateau p){
         Random r = new Random();
         System.out.println("Case dispo " + p.getNbOfUsableCase());
