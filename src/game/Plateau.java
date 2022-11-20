@@ -37,14 +37,14 @@ public class Plateau {
         return this.size;
     }
 
-    public void play(int numCase, Player p) throws Unplayable{
+    public void play(int numCase, Stat s) throws Unplayable{
         int line = numCase / this.size;
         int column = numCase % this.size;
 
         if (numCase < 0 || numCase >= Math.pow(this.size, 2) || !isEmpty(line, column))
             throw new Unplayable();
 
-        this.tab[line][column].play(p.getPawnColor());
+        this.tab[line][column].play(s);
         --nbOfUsableCase;
     }
 

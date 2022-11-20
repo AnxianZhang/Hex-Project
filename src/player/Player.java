@@ -26,11 +26,15 @@ public abstract class Player{
         return this.pawnColor;
     }
 
-    public int getPlayerChoice() {
+    public int getChoice() {
         return this.choice;
     }
 
-    public void setPlayerChoice(int choice){
+    public void setChoice(int choice){
         this.choice = choice;
+    }
+
+    public Identity getType(){
+        return this.type;
     }
 }
