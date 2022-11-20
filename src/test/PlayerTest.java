@@ -30,21 +30,18 @@ public class PlayerTest {
         p.play(2, human.getPawnColor());
         p.play(3, human.getPawnColor());
         p.play(7, human.getPawnColor());
-        ((IA)ia).makeChoice(p);
-        //p.play(ia.getChoice(), ia.getPawnColor());
-        ((IA)ia).makeChoice(p);
-        //p.play(ia.getChoice(), ia.getPawnColor());
-        ((IA)ia).makeChoice(p);
-        //p.play(ia.getChoice(), ia.getPawnColor());
-        ((IA)ia).makeChoice(p);
-        //p.play(ia.getChoice(), ia.getPawnColor());
 
-//        assertEquals(
-//                """
-//                         A B C
-//                        1 B B B
-//                        2  B W W
-//                        3   W B W
-//                        """, p.toString());
+        for (int i = 0; i <= p.taille(); ++i){
+            ((IA)ia).makeChoice(p);
+            p.play(ia.getChoice(), ia.getPawnColor());
+        }
+
+        assertEquals(
+                """
+                         A B C
+                        1 B B B
+                        2  B W W
+                        3   W B W
+                        """, p.toString());
     }
 }
