@@ -8,8 +8,6 @@ import player.IA;
 import player.Identity;
 import player.Player;
 
-import java.lang.reflect.Type;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
@@ -36,12 +34,11 @@ public class PlayerTest {
             p.play(ia.getChoice(), ia.getPawnColor());
         }
 
-        assertEquals(
-                """
+        assertEquals("""
                          A B C
                         1 B B B
                         2  B W W
                         3   W B W
                         """, p.toString());
-    }
+}
 }
