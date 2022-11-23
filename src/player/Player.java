@@ -3,7 +3,7 @@ package player;
 import app.IPlayer;
 import game.Stat;
 
-public abstract class Player{
+public abstract class Player implements IPlayer{
     private static boolean isFirstColor = true;
     protected int choice;
     private Identity type;
@@ -30,8 +30,8 @@ public abstract class Player{
         return this.choice;
     }
 
-    public void setChoice(int choice){
-        this.choice = choice;
+    public void setChoice(int inChoice){
+        this.choice = inChoice;
     }
 
     public Identity getType(){

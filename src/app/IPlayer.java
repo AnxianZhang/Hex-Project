@@ -1,7 +1,13 @@
 package app;
 
-public interface IPlayer {
-    void setPlayerChoice(int choix_entree);
+import game.Stat;
+import player.Identity;
 
-    int getPlayerChoice();
+public interface IPlayer {
+    void setChoice(int inChoice);
+
+    int getChoice();
+
+    Identity getType();
+    Stat getPawnColor();
 }

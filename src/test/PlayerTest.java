@@ -1,9 +1,10 @@
 package test;
 
 import app.Fabrique;
+import app.IPlayer;
 import game.Plateau;
 import game.Stat;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import player.IA;
 import player.Identity;
 import player.Player;
@@ -15,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
     @Test
     public void test(){
-        Player ia = Fabrique.makePlayer(Identity.IA);
-        Player human = Fabrique.makePlayer(Identity.HUMAIN);
+        IPlayer ia = Fabrique.makePlayer(Identity.IA);
+        IPlayer human = Fabrique.makePlayer(Identity.HUMAIN);
         Plateau p = new Plateau(3);
 
         assertEquals(Identity.IA, ia.getType());

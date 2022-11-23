@@ -1,6 +1,5 @@
 package test;
 
-import app.Fabrique;
 import exeption.Unplayable;
 import game.Plateau;
 
@@ -8,11 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import game.Stat;
 import org.junit.jupiter.api.Test;
-import player.IA;
-import player.Identity;
-import player.Player;
 
-class TestPlateau {
+class PlateauTest {
     @Test
     void test() {
         final int taille = 4, nbCases = taille * taille;
