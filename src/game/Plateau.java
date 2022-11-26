@@ -40,7 +40,6 @@ public class Plateau {
     public void play(int numCase, Stat s) throws Unplayable{
         int line = numCase / this.size;
         int column = numCase % this.size;
-
         if (numCase < 0 || numCase >= Math.pow(this.size, 2) || !isEmpty(line, column))
             throw new Unplayable();
 
