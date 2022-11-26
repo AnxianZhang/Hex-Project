@@ -1,32 +1,61 @@
 package app;
 
-import app.Fabrique;
+import exeption.NotAdaptedFunction;
 import game.Plateau;
-import player.Identity;
 import player.Player;
 
+import java.util.Random;
+
 public class Game {
-    private final IPlayer p1, p2;
+    private final Player p1, p2;
     private final Plateau plateau;
 
-    public Game(Identity p1, Identity p2, int size){
-        this.p1 = Fabrique.makePlayer(p1);
-        this.p2 = Fabrique.makePlayer(p2);
+    private boolean isPlayerOneTurn = true;
+    private final IHM ihm;
 
+    public Game(Player p1, Player p2, int size){
+        this.p1 = p1;
+        this.p2 = p2;
+        this.ihm = new IHM();
         this.plateau = new Plateau(size);
     }
 
-    public void playersChoice(int p1Choice, int p2Choice){
-        this.p1.setChoice(p1Choice);
-        this.p2.setChoice(p2Choice);
+    public void setPlayersChoice(int choice){
+        if (this.isPlayerOneTurn){
+            p1.setChoice(p1.getIsIA() ? gameChoice() : choice);
+            this.plateau.play(p1.getChoice(), p1.getPawnColor());
+            this.isPlayerOneTurn = false;
+        }else{
+            p2.setChoice(p2.getIsIA() ? gameChoice() : choice);
+            this.plateau.play(p2.getChoice(), p2.getPawnColor());
+            this.isPlayerOneTurn = true;
+        }
+    }
+    public void setPlayersChoice(){
+        if (!this.p1.getIsIA() && !this.p2.getIsIA()) throw new NotAdaptedFunction();
+        setPlayersChoice(0);
     }
 
-    public boolean stillPlayable(){
+
+    public boolean isFull(){
         return this.plateau.isFull();
     }
 
-    public void play() {
-        this.plateau.play(this.p1.getChoice(), this.p1.getPawnColor());
-        this.plateau.play(this.p2.getChoice(), this.p2.getPawnColor());
+    private int gameChoice(){
+        Random r = new Random();
+        int randCase = r.nextInt(this.plateau.getNbOfUsableCase()) + 1;
+        int ctp = 0;
+        for (int i = 0; i < this.plateau.taille(); ++i)
+            for (int j = 0; j < this.plateau.taille(); ++j){
+                if (this.plateau.isEmpty(i, j)) ++ctp;
+                if (ctp == randCase)
+                    return (i * this.plateau.taille() + j);
+            }
+        return -1;
+    }
+
+    @Override
+    public String toString(){
+        return this.plateau.toString();
     }
 }
