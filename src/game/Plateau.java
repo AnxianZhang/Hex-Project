@@ -2,7 +2,6 @@ package game;
 
 import exeption.Unplayable;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
