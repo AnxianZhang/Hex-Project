@@ -1,6 +1,8 @@
 package game;
 
 import exeption.Unplayable;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,21 +50,31 @@ public class Plateau {
         --nbOfUsableCase;
     }
 
-    private ArrayList<Integer> getColorPawns(Stat color){
+    /**
+     * Calcule tout les positions de départ des pions, selon sa couleur.
+     * BLACK: positions des cases de la première ligne
+     * WHITE: positions des cases de la première colonne
+     * @param color couleur du pion d'un des deux joueurs
+     * @return le tableau des position
+     */
+    private ArrayList<Integer> getPawnsPositions(Stat color){
         ArrayList<Integer> pawnsPosition = new ArrayList<>();
-
-        for (int i = 0; i < this.size; ++i)
-            pawnsPosition.add((color == Stat.BLACK) ? i + 1 : i * this.size);
-
+        System.out.println("positions de début");
+        for (int i = 0; i < this.size; ++i){
+            pawnsPosition.add((color == Stat.BLACK) ? i : i * this.size);
+            System.out.println(pawnsPosition.get(i));
+        }
         return pawnsPosition;
     }
 
+    // cette fonction peux être juste appeler une fois dans isWin, puis le passer en param de la fonction de récurence
     private boolean isInEndPosition(Stat color, int positionToCheck){
         ArrayList<Integer> pawsEndPosition = new ArrayList<>();
-
-        for (int i =0; i < this.size; ++i)
-            pawsEndPosition.add((color == Stat.BLACK) ? this.size * this.size  - i + 1 : i * this.size + this.size - 1);
-
+        System.out.println("Postion de fin");
+        for (int i = 0; i < this.size; ++i){
+            pawsEndPosition.add((color == Stat.BLACK) ? this.size * this.size - i - 1 : i * this.size + this.size - 1);
+            System.out.println(pawsEndPosition.get(i));
+        }
         return pawsEndPosition.contains(positionToCheck);
     }
 
@@ -72,23 +84,27 @@ public class Plateau {
 
         if(isInEndPosition(playerPawnColor, pawnPosition)) return true;
 
+        if (this.tab[line][column].getStat() != playerPawnColor) return false;
+
         for (int i = -1; i < 2; ++i)
             for (int j = -1; j < 2; ++j){
                 if (line + i < this.size && line + i >= 0 &&
                     column + j < this.size && column + j >= 0 &&
-                    endPositions.contains(i+"+"+j)) // si le coupe i j se trouvent autour d'un point
-                    if (this.tab[line + i][column + j].getStat() == playerPawnColor){
-                        checkItForOnePosition(playerPawnColor,
-                                ((line + i)  * this.size) + (column + j), endPositions);
-                        this.tab[line + i][column + j].play(Stat.CHECKED);
+                    endPositions.contains(i+"+"+j)) // si le coupe i j se trouve bien autour d'une position
+                    if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
+                            !this.tab[line + i][column + j].isChecked()){
+                        this.tab[line + i][column + j].setChecked(true);
+                        System.out.println(((line + i)  * this.size) + (column + j));
+                        return checkItForOnePosition(playerPawnColor, ((line + i)  * this.size) + (column + j), endPositions);
                     }
             }
+        //this.tab[line][column].setChecked(false);
         return false;
     }
 
     public boolean isWin(Stat playerPawn){
-        ArrayList<Integer> pawnsPosition = getColorPawns(playerPawn);
-        ArrayList<String> endPositions = new ArrayList<>(
+        ArrayList<Integer> pawnsPosition = getPawnsPositions(playerPawn);
+        ArrayList<String> sidePositions = new ArrayList<>(
                 Arrays.asList(
                         "-1+0",
                         "-1+1",
@@ -98,7 +114,7 @@ public class Plateau {
                         "0+-1"));
 
         while (!pawnsPosition.isEmpty()){
-            if (checkItForOnePosition(playerPawn, pawnsPosition.get(0), endPositions)) return true;
+            if (checkItForOnePosition(playerPawn, pawnsPosition.get(0), sidePositions)) return true;
             pawnsPosition.remove(0);
         }
         return false;

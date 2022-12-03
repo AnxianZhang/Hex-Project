@@ -2,6 +2,7 @@ package game;
 
 public class Case {
     private Stat stat;
+    private boolean isChecked = false;
 
     public Case (){
         this.stat = Stat.EMPTY;
@@ -11,8 +12,15 @@ public class Case {
         return stat;
     }
 
+    public boolean isChecked() {
+        return this.isChecked;
+    }
+
+    public void setChecked(boolean isChecked){
+        this.isChecked = isChecked;
+    }
+
     public void play(Stat pawnColor){
-        if (pawnColor == Stat.CHECKED) this.stat = Stat.CHECKED;
         this.stat = (pawnColor == Stat.WHITE) ? Stat.WHITE : Stat.BLACK;
     }
 }

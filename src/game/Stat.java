@@ -4,5 +4,4 @@ public enum Stat {
     WHITE,
     BLACK,
     EMPTY,
-    CHECKED
 }
