@@ -12,7 +12,7 @@ public class Case {
     }
 
     public void play(Stat pawnColor){
-        if (pawnColor == Stat.WHITE) this.stat = Stat.WHITE;
-        else this.stat = Stat.BLACK;
+        if (pawnColor == Stat.CHECKED) this.stat = Stat.CHECKED;
+        this.stat = (pawnColor == Stat.WHITE) ? Stat.WHITE : Stat.BLACK;
     }
 }
