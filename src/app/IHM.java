@@ -11,13 +11,14 @@ public class IHM {
     private final static int NB_TYPE_JOUEUR = Identity.values().length;
 
     //HashMap<Integer, String> Choix_type_joueur = new HashMap<>();
-    private int compteur = 0;
+
     private Scanner sc = new Scanner(System.in);
     public IHM(){
 
     }
     public Identity recuperer_type_de_joueur(){
-        System.out.println("Choissisez le type du joueur par un numéro" + compteur++ );
+        System.out.println("Choissisez le type du joueur par un numéro" );
+        afficher_choix_possible();
 
 
         while (true) {
@@ -26,7 +27,7 @@ public class IHM {
 
             else  {
                 int choix = sc.nextInt() ;
-                if (choix <= NB_TYPE_JOUEUR && choix >0 ){
+                if (choix <NB_TYPE_JOUEUR && choix >0 ){
                     return Identity.values()[choix];
                 }
                 System.out.print("Un nombre valide est requis, saisissez votre choix : ");
@@ -45,6 +46,7 @@ public class IHM {
             return false;
 
         }
+        System.out.println("fdsfjhcaca");
         return true;
     }
     private void afficher_choix_possible(){
