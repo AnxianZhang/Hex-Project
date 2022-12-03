@@ -5,6 +5,7 @@ import game.Stat;
 
 public class App {
     public static void main(String[] args) {
+
         Plateau p = new Plateau(4);
         p.play(0, Stat.WHITE);
         p.play(1, Stat.WHITE);
@@ -23,5 +24,7 @@ public class App {
         p.play(14, Stat.WHITE);
         p.play(15, Stat.BLACK);
         System.out.println(p);
+
+        new IHM().recuperer_type_de_joueur();
     }
 }

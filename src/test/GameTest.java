@@ -2,12 +2,14 @@ package test;
 
 import app.Game;
 import exeption.NotAdaptedFunction;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Test;
 import player.Identity;
 import player.Player;
 
-class GameTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class GameTest {
     /* le test entre hummain et ia n'est pas fesable */
     @Test
     public void testPlayerVsIA (){
