@@ -1,6 +1,5 @@
 package app;
 
-
 import game.Stat;
 import player.Identity;
 
