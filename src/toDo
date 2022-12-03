@@ -1,5 +1,7 @@
 TODO - faire classe ihm  et son interface (in progess)
 TODO - supprimer ia et humain et juste faire player avec boolean esthumain
 TODO - mettre ihm en attribut de game
+TODO - ajouter un prenom aux joueur
+TODO - compter le nombre de bion necessaire du perdant  et gagnant
 
 
