@@ -55,4 +55,8 @@ public class IHM {
             System.out.println("choix " + i + " " + Stat.values()[i].toString());
         }
     }
+    public void afficher_resultat(Stat gagnant , Stat perdant){
+        System.out.println("Les " + gagnant.name() + " ont gagner ");
+        System.out.println("Les " + perdant.name() + " ont perdu");
+    }
 }
