@@ -5,6 +5,8 @@ import exeption.Unplayable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.ArrayList;
+
 public class Plateau {
     private final static int MAX_PLAYERS = 2;
     private int nbOfUsableCase;
@@ -132,6 +134,30 @@ public class Plateau {
         if (this.tab[line][column].getStat() == Stat.WHITE) return " W";
         return " .";
     }
+
+//    public boolean isWin(){
+//        i=0
+//    }
+
+    public ArrayList<Integer> neighborCase(int numCase){
+        ArrayList<Integer>nc = new ArrayList<>();
+        int x = numCase / this.size;
+        int y = numCase % this.size;
+
+        nc.add(isEmpty(x-1,y)?null:toNumCase(x-1,y));
+        nc.add(isEmpty(x-1,y+1)?null:toNumCase(x-1,y+1));
+        nc.add(isEmpty(x,y+1)?null:toNumCase(x,y+1));
+        nc.add(isEmpty(x+1,y)?null:toNumCase(x+1,y));
+        nc.add(isEmpty(x+1,y-1)?null:toNumCase(x+1,y-1));
+        nc.add(isEmpty(x,y-1)?null:toNumCase(x,y-1));
+
+        return nc;
+    }
+
+    public int toNumCase(int x, int y){
+        return x * this.taille() + y;
+    }
+
 
     @Override
     public String toString() {
