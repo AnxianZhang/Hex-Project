@@ -1,16 +1,15 @@
 package player;
 
-import app.IPlayer;
 import game.Stat;
 
-public abstract class Player{
+public class Player{
     private static boolean isFirstColor = true;
-    protected int choice;
-    private Identity type;
+    private int choice;
+    private boolean isIA;
     private Stat pawnColor;
 
     public Player(Identity type) {
-        this.type = type;
+        this.isIA = type == Identity.IA;
 
         if(isFirstColor){
             this.pawnColor = Stat.WHITE;
@@ -30,11 +29,11 @@ public abstract class Player{
         return this.choice;
     }
 
-    public void setChoice(int choice){
-        this.choice = choice;
+    public void setChoice(int inChoice){
+        this.choice = inChoice;
     }
 
-    public Identity getType(){
-        return this.type;
+    public boolean getIsIA(){
+        return this.isIA;
     }
 }

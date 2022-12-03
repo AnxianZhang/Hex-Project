@@ -1,7 +1,8 @@
 package game;
 
 import exeption.Unplayable;
-import player.Player;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Plateau {
     private final static int MAX_PLAYERS = 2;
@@ -40,12 +41,67 @@ public class Plateau {
     public void play(int numCase, Stat s) throws Unplayable{
         int line = numCase / this.size;
         int column = numCase % this.size;
-
         if (numCase < 0 || numCase >= Math.pow(this.size, 2) || !isEmpty(line, column))
             throw new Unplayable();
 
         this.tab[line][column].play(s);
         --nbOfUsableCase;
+    }
+
+    private ArrayList<Integer> getColorPawns(Stat color){
+        ArrayList<Integer> pawnsPosition = new ArrayList<>();
+
+        for (int i = 0; i < this.size; ++i)
+            pawnsPosition.add((color == Stat.BLACK) ? i + 1 : i * this.size);
+
+        return pawnsPosition;
+    }
+
+    private boolean isInEndPosition(Stat color, int positionToCheck){
+        ArrayList<Integer> pawsEndPosition = new ArrayList<>();
+
+        for (int i =0; i < this.size; ++i)
+            pawsEndPosition.add((color == Stat.BLACK) ? this.size * this.size  - i + 1 : i * this.size + this.size - 1);
+
+        return pawsEndPosition.contains(positionToCheck);
+    }
+
+    private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions){
+        int line = pawnPosition / this.size;
+        int column = pawnPosition % this.size;
+
+        if(isInEndPosition(playerPawnColor, pawnPosition)) return true;
+
+        for (int i = -1; i < 2; ++i)
+            for (int j = -1; j < 2; ++j){
+                if (line + i < this.size && line + i >= 0 &&
+                    column + j < this.size && column + j >= 0 &&
+                    endPositions.contains(i+"+"+j)) // si le coupe i j se trouvent autour d'un point
+                    if (this.tab[line + i][column + j].getStat() == playerPawnColor){
+                        checkItForOnePosition(playerPawnColor,
+                                ((line + i)  * this.size) + (column + j), endPositions);
+                        this.tab[line + i][column + j].play(Stat.CHECKED);
+                    }
+            }
+        return false;
+    }
+
+    public boolean isWin(Stat playerPawn){
+        ArrayList<Integer> pawnsPosition = getColorPawns(playerPawn);
+        ArrayList<String> endPositions = new ArrayList<>(
+                Arrays.asList(
+                        "-1+0",
+                        "-1+1",
+                        "0+1",
+                        "1+0",
+                        "1+-1",
+                        "0+-1"));
+
+        while (!pawnsPosition.isEmpty()){
+            if (checkItForOnePosition(playerPawn, pawnsPosition.get(0), endPositions)) return true;
+            pawnsPosition.remove(0);
+        }
+        return false;
     }
 
     public int getNbOfUsableCase(){
