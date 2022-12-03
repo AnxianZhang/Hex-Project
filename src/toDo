@@ -1,6 +1,5 @@
-- faire classe ihm  et son interface
+- faire classe ihm  et son interface (in progess)
 - supprimer ia et humain et juste faire player avec boolean esthumain
-- deplacer algo de ia dans jeu ou plateau
 - mettre ihm en attribut de game
 
 
