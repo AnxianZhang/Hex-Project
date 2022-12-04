@@ -41,6 +41,11 @@ public class IHM {
         System.out.println("Les " + perdant.getPawnColor().name() + " ont perdu");
     }
 
+    public void afficher_le_coup(Player joueur , int choix){
+        System.out.println( joueur.getPawnColor() + "ont jouées à la case " + choix);
+
+    }
+
     public int demander_coup_a_jouer(Plateau p){
         final int  PREMIERE_CASE_DU_PLATEAU = 0;
         System.out.println("Choississez une case valide a jouer sur le plateau");
