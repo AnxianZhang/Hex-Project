@@ -5,10 +5,7 @@ import exeption.Unplayable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import java.util.ArrayList;
-
 public class Plateau {
-    private final static int MAX_PLAYERS = 2;
     private int nbOfUsableCase;
     private final int size;
     private final Case[][] tab;
@@ -51,13 +48,6 @@ public class Plateau {
         --nbOfUsableCase;
     }
 
-    /**
-     * Calcule tout les positions de départ des pions, selon sa couleur.
-     * BLACK: positions des cases de la première ligne
-     * WHITE: positions des cases de la première colonne
-     * @param color couleur du pion d'un des deux joueurs
-     * @return le tableau des position
-     */
     private ArrayList<Integer> getPawnsPositions(Stat color){
         ArrayList<Integer> pawnsPosition = new ArrayList<>();
         System.out.println("positions de début");
@@ -84,22 +74,20 @@ public class Plateau {
         int column = pawnPosition % this.size;
 
         if(isInEndPosition(playerPawnColor, pawnPosition)) return true;
-
         if (this.tab[line][column].getStat() != playerPawnColor) return false;
 
         for (int i = -1; i < 2; ++i)
-            for (int j = -1; j < 2; ++j){
+            for (int j = -1; j < 2; ++j) {
                 if (line + i < this.size && line + i >= 0 &&
-                    column + j < this.size && column + j >= 0 &&
-                    endPositions.contains(i+"+"+j)) // si le coupe i j se trouve bien autour d'une position
+                        column + j < this.size && column + j >= 0 &&
+                        endPositions.contains(i + "+" + j)) // si le couple i j se trouve bien au tour d'une position existante
                     if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
-                            !this.tab[line + i][column + j].isChecked()){
+                            !this.tab[line + i][column + j].isChecked()) {
                         this.tab[line + i][column + j].setChecked(true);
-                        System.out.println(((line + i)  * this.size) + (column + j));
-                        return checkItForOnePosition(playerPawnColor, ((line + i)  * this.size) + (column + j), endPositions);
+                        System.out.println(((line + i) * this.size) + (column + j));
+                        return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions);
                     }
             }
-        //this.tab[line][column].setChecked(false);
         return false;
     }
 
@@ -135,30 +123,6 @@ public class Plateau {
         return " .";
     }
 
-//    public boolean isWin(){
-//        i=0
-//    }
-
-    public ArrayList<Integer> neighborCase(int numCase){
-        ArrayList<Integer>nc = new ArrayList<>();
-        int x = numCase / this.size;
-        int y = numCase % this.size;
-
-        nc.add(isEmpty(x-1,y)?null:toNumCase(x-1,y));
-        nc.add(isEmpty(x-1,y+1)?null:toNumCase(x-1,y+1));
-        nc.add(isEmpty(x,y+1)?null:toNumCase(x,y+1));
-        nc.add(isEmpty(x+1,y)?null:toNumCase(x+1,y));
-        nc.add(isEmpty(x+1,y-1)?null:toNumCase(x+1,y-1));
-        nc.add(isEmpty(x,y-1)?null:toNumCase(x,y-1));
-
-        return nc;
-    }
-
-    public int toNumCase(int x, int y){
-        return x * this.taille() + y;
-    }
-
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -171,7 +135,6 @@ public class Plateau {
                 sb.append(stateOfAPosition(i, j));
             sb.append("\n");
         }
-
         return sb.toString();
     }
 }

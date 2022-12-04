@@ -8,7 +8,7 @@ import player.Player;
 
 import java.util.Scanner;
 public class IHM {
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
     public IHM(){
 
     }

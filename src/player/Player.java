@@ -5,8 +5,8 @@ import game.Stat;
 public class Player{
     private static boolean isFirstColor = true;
     private int choice;
-    private boolean isIA;
-    private Stat pawnColor;
+    private final boolean isIA;
+    private final Stat pawnColor;
 
     public Player(Identity type) {
         this.isIA = type == Identity.IA;
