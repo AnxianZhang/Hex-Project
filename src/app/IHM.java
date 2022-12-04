@@ -1,19 +1,12 @@
 package app;
 
-
 import game.Plateau;
 import game.Stat;
 import player.Identity;
 import player.Player;
 
-
 import java.util.Scanner;
 public class IHM {
-
-
-
-    //HashMap<Integer, String> Choix_type_joueur = new HashMap<>();
-
     private Scanner sc = new Scanner(System.in);
     public IHM(){
 
@@ -29,7 +22,6 @@ public class IHM {
         return Identity.values()[choix];
     }
 
-
     private void afficher_choix_possible(){
 
         for (int i = 0; i < Identity.values().length ;++i){
@@ -39,6 +31,7 @@ public class IHM {
     public void afficher_resultat(Player gagnant , Player perdant){
         System.out.println("Les " + gagnant.getPawnColor().name() + " ont gagner ");
         System.out.println("Les " + perdant.getPawnColor().name() + " ont perdu");
+        System.out.println("La partie est finie");
     }
 
     public void mettre_a_jour_plateau(Plateau p){
@@ -46,7 +39,6 @@ public class IHM {
     }
     public void afficher_le_coup(Player joueur , int choix){
         System.out.println( joueur.getPawnColor().name() + "ont jouées à la case " + choix);
-
     }
 
     public int demander_coup_a_jouer(Plateau p , Player joueur){
@@ -54,7 +46,6 @@ public class IHM {
         System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
         return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille());
     }
-
 
     private int demander_un_integer(int borne_inferieur_incluse, int borne_superieur){
         while (true) {
@@ -68,7 +59,6 @@ public class IHM {
                 }
                 System.out.print("Un nombre valide est requis, saisissez votre choix : ");
                 sc.nextLine();
-
             }
         }
     }
@@ -81,7 +71,6 @@ public class IHM {
             return false;
 
         }
-
         return true;
     }
 }
