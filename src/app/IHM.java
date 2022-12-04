@@ -1,5 +1,6 @@
 package app;
 
+
 import game.Plateau;
 import game.Stat;
 import player.Identity;
