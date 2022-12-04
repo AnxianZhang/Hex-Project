@@ -3,6 +3,7 @@ package app;
 import game.Stat;
 import org.junit.jupiter.api.Test;
 import player.Identity;
+import player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +17,6 @@ class IHMTest {
 
     @Test
     void afficher_resultat() {
-        screen.afficher_resultat(Stat.BLACK, Stat.WHITE);
+        screen.afficher_resultat(new Player(Identity.HUMAN), new Player(Identity.HUMAN));
     }
 }
