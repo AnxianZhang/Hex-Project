@@ -41,14 +41,17 @@ public class IHM {
         System.out.println("Les " + perdant.getPawnColor().name() + " ont perdu");
     }
 
+    public void mettre_a_jour_plateau(Plateau p){
+        System.out.println(p);
+    }
     public void afficher_le_coup(Player joueur , int choix){
-        System.out.println( joueur.getPawnColor() + "ont jouées à la case " + choix);
+        System.out.println( joueur.getPawnColor().name() + "ont jouées à la case " + choix);
 
     }
 
-    public int demander_coup_a_jouer(Plateau p){
+    public int demander_coup_a_jouer(Plateau p , Player joueur){
         final int  PREMIERE_CASE_DU_PLATEAU = 0;
-        System.out.println("Choississez une case valide a jouer sur le plateau");
+        System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
         return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille());
     }
 
