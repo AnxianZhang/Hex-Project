@@ -15,10 +15,10 @@ public class Game {
     private boolean isPlayerOneTurn = true;
     private final IIHM ihm;
 
-    public Game(Player p1, Player p2, int size){
+    public Game(Player p1, Player p2, int size , IIHM human_interface){
         this.p1 = p1;
         this.p2 = p2;
-        this.ihm = new IHM();
+        this.ihm = human_interface;
         this.plateau = new Plateau(size);
     }
 
