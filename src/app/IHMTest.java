@@ -1,14 +1,13 @@
 package app;
 
-import game.Stat;
+import IHM.IIHM;
+import IHM.IHM;
 import org.junit.jupiter.api.Test;
 import player.Identity;
 import player.Player;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class IHMTest {
-    private IHM screen = new IHM();
+    private IIHM screen = new IHM();
     @Test
     void recuperer_type_de_joueur() {
 

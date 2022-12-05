@@ -1,4 +1,4 @@
-package app;
+package IHM;
 
 
 import game.Plateau;
@@ -7,11 +7,12 @@ import player.Identity;
 import player.Player;
 
 import java.util.Scanner;
-public class IHM {
+public class IHM implements IIHM {
     private final Scanner sc = new Scanner(System.in);
     public IHM(){
 
     }
+    @Override
     public Identity recuperer_type_de_joueur(){
         final int  PREMIER_ELEMENT = 0;
 
@@ -29,20 +30,24 @@ public class IHM {
             System.out.println("choix " + i + " " + Stat.values()[i].toString());
         }
     }
-    public void afficher_resultat(Player gagnant , Player perdant){
+    @Override
+    public void afficher_resultat(Player gagnant, Player perdant){
         System.out.println("Les " + gagnant.getPawnColor().name() + " ont gagner ");
         System.out.println("Les " + perdant.getPawnColor().name() + " ont perdu");
         System.out.println("La partie est finie");
     }
 
+    @Override
     public void mettre_a_jour_plateau(Plateau p){
         System.out.println(p);
     }
-    public void afficher_le_coup(Player joueur , int choix){
+    @Override
+    public void afficher_le_coup(Player joueur, int choix){
         System.out.println( joueur.getPawnColor().name() + "ont jouées à la case " + choix);
     }
 
-    public int demander_coup_a_jouer(Plateau p , Player joueur){
+    @Override
+    public int demander_coup_a_jouer(Plateau p, Player joueur){
         final int  PREMIERE_CASE_DU_PLATEAU = 0;
         System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
         return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille());

@@ -1,5 +1,7 @@
 package app;
 
+import IHM.IHM;
+import IHM.IIHM;
 import exeption.NotAdaptedFunction;
 import game.Plateau;
 import player.Player;
@@ -11,7 +13,7 @@ public class Game {
     private final Plateau plateau;
 
     private boolean isPlayerOneTurn = true;
-    private final IHM ihm;
+    private final IIHM ihm;
 
     public Game(Player p1, Player p2, int size){
         this.p1 = p1;

@@ -1,5 +1,6 @@
 package app;
 
+import IHM.IHM;
 import game.Plateau;
 import game.Stat;
 
