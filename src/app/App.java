@@ -3,9 +3,13 @@ package app;
 import IHM.IHM;
 import game.Plateau;
 import game.Stat;
+import player.Identity;
+import player.Player;
 
 public class App {
     public static void main(String[] args) {
+        Game partie = new Game(4,new IHM()) ;
+        Game test = new Game(new Player(Identity.HUMAN), new Player(Identity.HUMAN),4,new IHM());
 
         Plateau p = new Plateau(4);
         p.play(0, Stat.WHITE);
@@ -28,6 +32,6 @@ public class App {
 
         System.out.println(p);
 
-        new IHM().recuperer_type_de_joueur();
+        new IHM().recuperer_type_de_joueur();//test des entrées sorties au clavier
     }
 }

@@ -15,8 +15,16 @@ public class Game {
     private boolean isPlayerOneTurn = true;
     private final IIHM ihm;
 
+    public Game( int size , IIHM human_interface){
+        this.p1 = new Player(human_interface.recuperer_type_de_joueur()) ;
+        this.p2 = new Player(human_interface.recuperer_type_de_joueur());
+        this.ihm = human_interface;
+        this.plateau = new Plateau(size);
+    }
+
+   //pour simplifier nos test
     public Game(Player p1, Player p2, int size , IIHM human_interface){
-        this.p1 = p1;
+        this.p1 = p1 ;
         this.p2 = p2;
         this.ihm = human_interface;
         this.plateau = new Plateau(size);
