@@ -1,6 +1,5 @@
 package app;
 
-import IHM.IHM;
 import IHM.IIHM;
 import exeption.NotAdaptedFunction;
 import game.Plateau;
