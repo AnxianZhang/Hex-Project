@@ -40,7 +40,7 @@ public class Plateau {
 
     /**
      * @param numCase cela indique sur quelle case le joueur va jouer
-     * @param s indique quel joueur joue en indiquant sa couleur, WHITE OU BLACK
+     * @param s indique quel joueur joue en indiquant sa couleur, WHITE OU BLACK.
      * @throws Unplayable le joueur ne peut pas jouer si le numéro de case n'existe pas : s'il est inférieur à 0, s'il dépasse le plateau de jeu ou si la case n'est pas disponible
      * la méthode play dans la méthode, change si toutes les conditions le veulent, la case de la couleur du joueur qui a joué et l'on retire une case du nombre des cases à jouées
      */
