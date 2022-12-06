@@ -50,10 +50,14 @@ public class Plateau {
 
     private ArrayList<Integer> getPawnsPositions(Stat color){
         ArrayList<Integer> pawnsPosition = new ArrayList<>();
-        System.out.println("positions de début");
         for (int i = 0; i < this.size; ++i){
-            pawnsPosition.add((color == Stat.BLACK) ? i : i * this.size);
-            System.out.println(pawnsPosition.get(i));
+            if (color == Stat.BLACK) {
+                if (tab[i/this.size][i%this.size].getStat() == Stat.BLACK)
+                    pawnsPosition.add(i);
+            }
+            else
+                if (tab[(i * this.size)/this.size][(i * this.size)%this.size].getStat() == Stat.WHITE)
+                    pawnsPosition.add(i * this.size);
         }
         return pawnsPosition;
     }
@@ -61,14 +65,25 @@ public class Plateau {
     // cette fonction peux être juste appeler une fois dans isWin, puis le passer en param de la fonction de récurence
     private boolean isInEndPosition(Stat color, int positionToCheck){
         ArrayList<Integer> pawsEndPosition = new ArrayList<>();
-        System.out.println("Postion de fin");
         for (int i = 0; i < this.size; ++i){
-            pawsEndPosition.add((color == Stat.BLACK) ? this.size * this.size - i - 1 : i * this.size + this.size - 1);
-            System.out.println(pawsEndPosition.get(i));
+            if (color == Stat.BLACK){
+                if (tab[(this.size * this.size - i - 1)/this.size][(this.size * this.size - i - 1)%this.size].getStat() == Stat.BLACK)
+                    pawsEndPosition.add(this.size * this.size - i - 1);
+            }
+            else
+                if (tab[(i * this.size + this.size - 1)/this.size][(i * this.size + this.size - 1)%this.size].getStat() == Stat.WHITE)
+                    pawsEndPosition.add(i * this.size + this.size - 1);
         }
         return pawsEndPosition.contains(positionToCheck);
     }
 
+    /**
+     *
+     * @param playerPawnColor
+     * @param pawnPosition
+     * @param endPositions
+     * @return
+     */
     private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions){
         int line = pawnPosition / this.size;
         int column = pawnPosition % this.size;
@@ -84,11 +99,16 @@ public class Plateau {
                     if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
                             !this.tab[line + i][column + j].isChecked()) {
                         this.tab[line + i][column + j].setChecked(true);
-                        System.out.println(((line + i) * this.size) + (column + j));
                         return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions);
                     }
             }
         return false;
+    }
+
+    private void remettreToutFalse(){
+        for (int i = 0; i < this.size; ++i)
+            for (int j = 0; j < this.size; ++j)
+                this.tab[i][j].setChecked(false);
     }
 
     public boolean isWin(Stat playerPawn){
@@ -106,6 +126,7 @@ public class Plateau {
             if (checkItForOnePosition(playerPawn, pawnsPosition.get(0), sidePositions)) return true;
             pawnsPosition.remove(0);
         }
+        remettreToutFalse();
         return false;
     }
 
