@@ -1,6 +1,7 @@
 package IHM;
 
 
+import app.Game;
 import app.IIHM;
 import game.Plateau;
 import game.Stat;
@@ -42,6 +43,11 @@ public class IHM implements IIHM {
     public void mettre_a_jour_plateau(Plateau p){
         System.out.println(p);
     }
+
+    @Override
+    public void mettre_a_jour_plateau(Game g){
+        System.out.println(g);
+    }
     @Override
     public void afficher_le_coup(Player joueur, int choix){
         System.out.println( joueur.getPawnColor().name() + "ont jouées à la case " + choix);
@@ -52,6 +58,13 @@ public class IHM implements IIHM {
         final int  PREMIERE_CASE_DU_PLATEAU = 0;
         System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
         return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille());
+    }
+
+    @Override
+    public int demander_coup_a_jouer(Game g, Player joueur){
+        final int  PREMIERE_CASE_DU_PLATEAU = 0;
+        System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
+        return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,g.nbCases());
     }
 
     private int demander_un_integer(int borne_inferieur_incluse, int borne_superieur){

@@ -14,4 +14,8 @@ public interface IIHM {
     void afficher_le_coup(Player joueur, int choix);
 
     int demander_coup_a_jouer(Plateau p, Player joueur);
+
+    int demander_coup_a_jouer(Game g, Player joueur);
+    void mettre_a_jour_plateau(Game g);
+
 }
