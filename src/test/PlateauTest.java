@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import game.Stat;
 import org.junit.jupiter.api.Test;
+import player.Player;
 
 class PlateauTest {
     @Test
@@ -75,5 +76,18 @@ class PlateauTest {
                         3   W B W B
                         4    W B W B
                         """, p.toString());
+    }
+
+    @Test
+    public void testIsWin(){
+        Plateau p = new Plateau(4);
+        p.play(0, Stat.WHITE);
+        assertFalse(p.isWin(Stat.WHITE));
+        p.play(1, Stat.WHITE);
+        assertFalse(p.isWin(Stat.WHITE));
+        p.play(2, Stat.WHITE);
+        assertFalse(p.isWin(Stat.WHITE));
+        p.play(3, Stat.WHITE);
+        assertTrue(p.isWin(Stat.WHITE));
     }
 }

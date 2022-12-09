@@ -2,6 +2,7 @@ package app;
 
 import exeption.NotAdaptedFunction;
 import game.Plateau;
+import game.Stat;
 import player.Player;
 
 import java.util.Random;
@@ -28,6 +29,7 @@ public class Game {
     }
 
     public void setPlayersChoice(int choice){
+
         if (this.isPlayerOneTurn){
             p1.setChoice(p1.getIsIA() ? gameChoice() : choice);
             this.plateau.play(p1.getChoice(), p1.getPawnColor());
@@ -64,6 +66,9 @@ public class Game {
         return -1;
     }
 
+    public boolean isWin(Stat s){
+        return this.plateau.isWin(s);
+    }
     @Override
     public String toString(){
         return this.plateau.toString();
