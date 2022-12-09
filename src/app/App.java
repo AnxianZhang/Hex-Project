@@ -8,61 +8,9 @@ import player.Player;
 
 public class App {
     public static void main(String[] args) {
-        //Game partie = new Game(4,new IHM()) ;
-        //Game test = new Game(new Player(Identity.HUMAN), new Player(Identity.HUMAN),4,new IHM());
+        IIHM ihm=new IHM();
+        Player p1=new Player(ihm.recuperer_type_de_joueur());
 
-        Plateau p = new Plateau(4);
-        p.play(0, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(1, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(2, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(3, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(4, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(5, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(6, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(7, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(8, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(9, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(10, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(11, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(12, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(13, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(14, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(15, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-
-        System.out.println(p);
-
-        //new IHM().recuperer_type_de_joueur();//test des entrées sorties au clavier
+        //System.out.println(ihm.recuperer_type_de_joueur());
     }
 }

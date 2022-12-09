@@ -1,4 +1,4 @@
-package IHM;
+package app;
 
 import game.Plateau;
 import player.Identity;

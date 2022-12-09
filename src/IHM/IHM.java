@@ -1,6 +1,7 @@
 package IHM;
 
 
+import app.IIHM;
 import game.Plateau;
 import game.Stat;
 import player.Identity;
@@ -27,7 +28,7 @@ public class IHM implements IIHM {
     private void afficher_choix_possible(){
 
         for (int i = 0; i < Identity.values().length ;++i){
-            System.out.println("choix " + i + " " + Stat.values()[i].toString());
+            System.out.println("choix " + i + " pour l'" + Identity.values()[i].toString());
         }
     }
     @Override

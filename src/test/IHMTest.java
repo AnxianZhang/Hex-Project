@@ -1,6 +1,6 @@
-package app;
+package test;
 
-import IHM.IIHM;
+import app.IIHM;
 import IHM.IHM;
 import org.junit.jupiter.api.Test;
 import player.Identity;
