@@ -14,7 +14,7 @@ public class GameTest {
     /* le test entre hummain et ia n'est pas fesable */
     @Test
     public void testPlayerVsIA (){
-        Game gIAIA = new Game(new Player(Identity.IA), new Player(Identity.IA), 3 , new IHM());
+        Game gIAIA = new Game(new Player(Identity.IA), new Player(Identity.IA), 3);
 
         // test des IA
         while (!gIAIA.isFull()){
@@ -24,7 +24,7 @@ public class GameTest {
 
     @Test
     public void testPlayerVsPlayer(){
-        Game gPlayerPlayer = new Game(new Player(Identity.HUMAN), new Player(Identity.HUMAN), 3, new IHM());
+        Game gPlayerPlayer = new Game(new Player(Identity.HUMAN), new Player(Identity.HUMAN), 3);
         int [] human1Choice = {5, 3, 8, 0, 7};
         int [] human2Choice = {1, 2, 4, 6};
         int nbOfPawnPlayed1 = 0, nbOfPawnPlayed2 = 0;

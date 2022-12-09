@@ -8,61 +8,70 @@ import player.Player;
 
 public class App {
     public static void main(String[] args) {
-        //Game partie = new Game(4,new IHM()) ;
-        //Game test = new Game(new Player(Identity.HUMAN), new Player(Identity.HUMAN),4,new IHM());
+        IIHM ihm=new IHM();
+        final int TAILLE_JEU = 4;
+        Player p1 = new Player(ihm.recuperer_type_de_joueur()); // imparaire = WHITE
+        Player p2 = new Player(ihm.recuperer_type_de_joueur()); // pair = BLACK
+        Game g= new Game(p1, p2 ,TAILLE_JEU);
+        ihm.mettre_a_jour_plateau(g);
+        while (true){
+            if(p1.getIsIA() && p2.getIsIA()){
+                g.setPlayersChoice();
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p1.getPawnColor())) {
+                    ihm.afficher_resultat(p1,p2);
+                    return;
+                }
+                if(g.isWin(p2.getPawnColor())){
+                    ihm.afficher_resultat(p2,p1);
+                    return;
+                }
+            }
+            else if((p1.getIsIA() && !p2.getIsIA())){
+                g.setPlayersChoice();
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p1.getPawnColor())) {
+                    ihm.afficher_resultat(p1,p2);
+                    return;
+                }
+                g.setPlayersChoice(ihm.demander_coup_a_jouer(g, p2));
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p2.getPawnColor())){
+                    ihm.afficher_resultat(p2,p1);
+                    return;
+                }
+            }
+            else if((!p1.getIsIA() && p2.getIsIA())){
+                g.setPlayersChoice(ihm.demander_coup_a_jouer(g, p1));
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p1.getPawnColor())) {
+                    ihm.afficher_resultat(p1,p2);
+                    return;
+                }
+                g.setPlayersChoice();
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p2.getPawnColor())){
+                    ihm.afficher_resultat(p2,p1);
+                    return;
+                }
+            }
+            else {
+                g.setPlayersChoice(ihm.demander_coup_a_jouer(g, p1));
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p1.getPawnColor())) {
+                    ihm.afficher_resultat(p1,p2);
+                    return;
+                }
+                g.setPlayersChoice(ihm.demander_coup_a_jouer(g, p2));
+                ihm.mettre_a_jour_plateau(g);
+                if(g.isWin(p2.getPawnColor())){
+                    ihm.afficher_resultat(p2,p1);
+                    return;
+                }
+            }
 
-        Plateau p = new Plateau(4);
-        p.play(0, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(1, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(2, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(3, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(4, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(5, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(6, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(7, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(8, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(9, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(10, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(11, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(12, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(13, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(14, Stat.WHITE);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
-        p.play(15, Stat.BLACK);
-        System.out.println(p.isWin(Stat.BLACK));
-        System.out.println(p.isWin(Stat.WHITE));
+        }
 
-        System.out.println(p);
-
-        //new IHM().recuperer_type_de_joueur();//test des entrées sorties au clavier
+        //System.out.println(ihm.recuperer_type_de_joueur());
     }
 }

@@ -88,6 +88,8 @@ public class Plateau {
         int line = pawnPosition / this.size;
         int column = pawnPosition % this.size;
 
+        this.tab[line][column].setChecked(true);
+
         if(isInEndPosition(playerPawnColor, pawnPosition)) return true;
         if (this.tab[line][column].getStat() != playerPawnColor) return false;
 
@@ -98,7 +100,6 @@ public class Plateau {
                         endPositions.contains(i + "+" + j)) // si le couple i j se trouve bien au tour d'une position existante
                     if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
                             !this.tab[line + i][column + j].isChecked()) {
-                        this.tab[line + i][column + j].setChecked(true);
                         return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions);
                     }
             }

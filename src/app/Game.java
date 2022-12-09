@@ -1,8 +1,8 @@
 package app;
 
-import IHM.IIHM;
 import exeption.NotAdaptedFunction;
 import game.Plateau;
+import game.Stat;
 import player.Player;
 
 import java.util.Random;
@@ -12,24 +12,24 @@ public class Game {
     private final Plateau plateau;
 
     private boolean isPlayerOneTurn = true;
-    private final IIHM ihm;
-
-    public Game( int size , IIHM human_interface){
-        this.p1 = new Player(human_interface.recuperer_type_de_joueur()) ;
-        this.p2 = new Player(human_interface.recuperer_type_de_joueur());
-        this.ihm = human_interface;
-        this.plateau = new Plateau(size);
-    }
+//    private final IIHM ihm;
+//
+//    public Game( int size , IIHM human_interface){
+//        this.p1 = new Player(human_interface.recuperer_type_de_joueur()) ;
+//        this.p2 = new Player(human_interface.recuperer_type_de_joueur());
+//        this.ihm = human_interface;
+//        this.plateau = new Plateau(size);
+//    }
 
    //pour simplifier nos test
-    public Game(Player p1, Player p2, int size , IIHM human_interface){
+    public Game(Player p1, Player p2, int size){
         this.p1 = p1 ;
         this.p2 = p2;
-        this.ihm = human_interface;
         this.plateau = new Plateau(size);
     }
 
     public void setPlayersChoice(int choice){
+
         if (this.isPlayerOneTurn){
             p1.setChoice(p1.getIsIA() ? gameChoice() : choice);
             this.plateau.play(p1.getChoice(), p1.getPawnColor());
@@ -45,6 +45,9 @@ public class Game {
         setPlayersChoice(0);
     }
 
+    public int nbCases(){
+        return this.plateau.taille() * this.plateau.taille();
+    }
 
     public boolean isFull(){
         return this.plateau.isFull();
@@ -63,6 +66,9 @@ public class Game {
         return -1;
     }
 
+    public boolean isWin(Stat s){
+        return this.plateau.isWin(s);
+    }
     @Override
     public String toString(){
         return this.plateau.toString();
