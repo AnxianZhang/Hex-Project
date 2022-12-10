@@ -1,12 +1,15 @@
 package player;
 
+import Provider.Coup_Provider;
+import game.Plateau;
 import game.Stat;
 
-public class Player{
+public abstract class Player{
+    protected Coup_Provider provider = new Coup_Provider();
     private static boolean isFirstColor = true;
     private int choice;
     private final boolean isIA;
-    private final Stat pawnColor;
+    protected final Stat pawnColor;
 
     public Player(Identity type) {
         this.isIA = type == Identity.IA;
@@ -25,9 +28,7 @@ public class Player{
         return this.pawnColor;
     }
 
-    public int getChoice() {
-        return this.choice;
-    }
+    abstract public int getChoice(Plateau p) ;
 
     public void setChoice(int inChoice){
         this.choice = inChoice;
