@@ -17,5 +17,5 @@ class IHMTest {
     @Test
     void afficher_resultat() {
         screen.afficher_resultat(new Player(Identity.HUMAN), new Player(Identity.HUMAN));
-    }*/
+    } */
 }
