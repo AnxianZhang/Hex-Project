@@ -112,23 +112,29 @@ public class Plateau {
                 this.tab[i][j].setChecked(false);
     }
 
-    public boolean isWin(Stat playerPawn){
-        ArrayList<Integer> pawnsPosition = getPawnsPositions(playerPawn);
-        ArrayList<String> sidePositions = new ArrayList<>(
-                Arrays.asList(
-                        "-1+0",
-                        "-1+1",
-                        "0+1",
-                        "1+0",
-                        "1+-1",
-                        "0+-1"));
+    public Stat isWin(){
+        for (int i = 0; i < Stat.values().length - 1; i++) {
 
-        while (!pawnsPosition.isEmpty()){
-            if (checkItForOnePosition(playerPawn, pawnsPosition.get(0), sidePositions)) return true;
-            pawnsPosition.remove(0);
+
+            ArrayList<Integer> pawnsPosition = getPawnsPositions(Stat.values()[i]);
+            ArrayList<String> sidePositions = new ArrayList<>(
+                    Arrays.asList(
+                            "-1+0",
+                            "-1+1",
+                            "0+1",
+                            "1+0",
+                            "1+-1",
+                            "0+-1"));
+
+            while (!pawnsPosition.isEmpty()) {
+                if (checkItForOnePosition(Stat.values()[i], pawnsPosition.get(0), sidePositions)){
+                    return Stat.values()[i];
+                }
+                pawnsPosition.remove(0);
+            }
+            remettreToutFalse();
         }
-        remettreToutFalse();
-        return false;
+        return Stat.EMPTY;
     }
 
     public int getNbOfUsableCase(){
