@@ -32,13 +32,13 @@ public class App {
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
             plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
             ihm.mettre_a_jour_plateau(plateau);
-            ihm.afficher_le_coup(joueur_courant,choix_du_joueur_courant);
+            ihm.afficher_le_coup(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
             if (plateau.isWin() == Stat.WHITE) {
-                ihm.afficher_resultat(p1, p2);
+                ihm.afficher_resultat(p1.getPawnColor().name(), p2.getPawnColor().name());
                 return;
             }
             else if (plateau.isWin() == Stat.BLACK) {
-                ihm.afficher_resultat(p2, p1);
+                ihm.afficher_resultat(p2.getPawnColor().name(), p1.getPawnColor().name());
                 return;
             }
         }

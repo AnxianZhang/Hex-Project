@@ -1,7 +1,6 @@
 package IHM;
 
 
-import app.Game;
 import app.IIHM;
 import game.Plateau;
 import game.Stat;
@@ -33,9 +32,9 @@ public class IHM implements IIHM {
         }
     }
     @Override
-    public void afficher_resultat(Player gagnant, Player perdant){
-        System.out.println("Les " + gagnant.getPawnColor().name() + " ont gagner ");
-        System.out.println("Les " + perdant.getPawnColor().name() + " ont perdu");
+    public void afficher_resultat(String gagnant, String perdant){
+        System.out.println("Les " + gagnant + " ont gagner ");
+        System.out.println("Les " + perdant + " ont perdu");
         System.out.println("La partie est finie");
     }
 
@@ -44,28 +43,20 @@ public class IHM implements IIHM {
         System.out.println(p);
     }
 
+
     @Override
-    public void mettre_a_jour_plateau(Game g){
-        System.out.println(g);
-    }
-    @Override
-    public void afficher_le_coup(Player joueur, int choix){
-        System.out.println( joueur.getPawnColor().name() + "ont jouées à la case " + choix);
+    public void afficher_le_coup(String player_name, int choix){
+        System.out.println( player_name + " ont jouées à la case " + choix);
     }
 
     @Override
-    public int demander_coup_a_jouer(Plateau p, Player joueur){
+    public int demander_coup_a_jouer(Plateau p, String joueur){
         final int  PREMIERE_CASE_DU_PLATEAU = 0;
-        System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
-        return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille());
+        System.out.println(joueur +" choississez une case valide a jouer sur le plateau");
+        return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille() * p.taille());
     }
 
-    @Override
-    public int demander_coup_a_jouer(Game g, Player joueur){
-        final int  PREMIERE_CASE_DU_PLATEAU = 0;
-        System.out.println(joueur.getPawnColor().name() +" choississez une case valide a jouer sur le plateau");
-        return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,g.nbCases());
-    }
+
 
     private int demander_un_integer(int borne_inferieur_incluse, int borne_superieur){
         while (true) {
