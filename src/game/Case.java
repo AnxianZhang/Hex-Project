@@ -20,7 +20,7 @@ public class Case {
         this.isChecked = isChecked;
     }
 
-    public void play(Stat pawnColor){
-        this.stat = (pawnColor == Stat.WHITE) ? Stat.WHITE : Stat.BLACK;
+    public void play(Stat pawnColor) {
+        this.stat = pawnColor;
     }
 }

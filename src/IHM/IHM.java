@@ -3,9 +3,7 @@ package IHM;
 
 import app.IIHM;
 import game.Plateau;
-import game.Stat;
 import player.Identity;
-import player.Player;
 
 import java.util.Scanner;
 public class IHM implements IIHM {
