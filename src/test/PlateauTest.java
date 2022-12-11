@@ -9,10 +9,12 @@ import game.Stat;
 import org.junit.jupiter.api.Test;
 import player.Player;
 
-class PlateauTest {
+public class PlateauTest {
+    private final int taille = 4;
+
     @Test
-    void test() {
-        final int taille = 4, nbCases = taille * taille;
+    public void toStringTest() {
+        final int nbCases = taille * taille;
         Plateau p = new Plateau(taille);
 
         assertEquals(taille, p.taille());
@@ -44,13 +46,6 @@ class PlateauTest {
                         4    . . . .
                         """, p.toString());
 
-        assertThrows(Unplayable.class, () -> {
-            p.play(60, Stat.WHITE);
-            p.play(-99, Stat.BLACK);
-            p.play(16, Stat.WHITE);
-            p.play(0, Stat.BLACK);
-        });
-
         p.play(1, Stat.WHITE);
         p.play(2, Stat.BLACK);
         p.play(3, Stat.WHITE);
@@ -79,15 +74,26 @@ class PlateauTest {
     }
 
     @Test
+    public void exceptionTest(){
+        Plateau p = new Plateau(taille);
+        assertThrows(Unplayable.class, () -> {
+            p.play(60, Stat.WHITE);
+            p.play(-99, Stat.BLACK);
+            p.play(16, Stat.WHITE);
+            p.play(0, Stat.BLACK);
+        });
+    }
+
+    @Test
     public void testIsWin(){
         Plateau p = new Plateau(4);
         p.play(0, Stat.WHITE);
-        assertFalse(p.isWin(Stat.WHITE));
+        assertEquals(Stat.EMPTY, p.isWin());
         p.play(1, Stat.WHITE);
-        assertFalse(p.isWin(Stat.WHITE));
+        assertEquals(Stat.EMPTY, p.isWin());
         p.play(2, Stat.WHITE);
-        assertFalse(p.isWin(Stat.WHITE));
+        assertEquals(Stat.EMPTY, p.isWin());
         p.play(3, Stat.WHITE);
-        assertTrue(p.isWin(Stat.WHITE));
+        assertEquals(Stat.WHITE, p.isWin());
     }
 }
