@@ -1,17 +1,23 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import exeption.Unplayable;
 import game.Plateau;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import game.Stat;
-import org.junit.jupiter.api.Test;
-import player.Player;
 
 public class PlateauTest {
     private final int taille = 4;
 
+    /**
+     * Tests de tout les methode (sauf isWin)
+     *
+     * @see Plateau#taille()
+     * @see Plateau#getNbOfUsableCase()
+     * @see Plateau#isFull()
+     * @see Plateau#play(int, Stat)
+     * @see Plateau#toString()
+     */
     @Test
     public void toStringTest() {
         final int nbCases = taille * taille;
@@ -73,6 +79,11 @@ public class PlateauTest {
                         """, p.toString());
     }
 
+    /**
+     * test de l'exception Unplayable
+     *
+     * @see Plateau#play(int, Stat)
+     */
     @Test
     public void exceptionTest(){
         Plateau p = new Plateau(taille);
@@ -84,6 +95,13 @@ public class PlateauTest {
         });
     }
 
+    /**
+     * tests de la methode isWin couvrant la victoire des
+     * pions WHITE et BLACK
+     * 
+     * @see Plateau#play(int, Stat) 
+     * @see Plateau#isWin() 
+     */
     @Test
     public void testIsWin(){
         Plateau p = new Plateau(4);
@@ -94,6 +112,6 @@ public class PlateauTest {
         p.play(2, Stat.WHITE);
         assertEquals(Stat.EMPTY, p.isWin());
         p.play(3, Stat.WHITE);
-        assertEquals(Stat.WHITE, p.isWin());
+        assertEquals(Stat.WHITE, p.isWin()); // les pions WHITE on gagne !
     }
 }
