@@ -4,6 +4,7 @@ import exeption.Unplayable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Plateau {
     private int nbOfUsableCase;
@@ -84,7 +85,7 @@ public class Plateau {
      * @param endPositions
      * @return
      */
-    private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions){
+    private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions, Stack<Integer> s){
         int line = pawnPosition / this.size;
         int column = pawnPosition % this.size;
 
@@ -100,10 +101,12 @@ public class Plateau {
                         endPositions.contains(i + "+" + j)) // si le couple i j se trouve bien au tour d'une position existante
                     if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
                             !this.tab[line + i][column + j].isChecked()) {
-                        return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions);
+                        s.push(pawnPosition);
+                        return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions, s);
                     }
             }
-        return false;
+        if(s.isEmpty()) return false;
+        return checkItForOnePosition(playerPawnColor, s.pop(), endPositions, s);
     }
 
     private void remettreToutFalse(){
@@ -114,8 +117,7 @@ public class Plateau {
 
     public Stat isWin(){
         for (int i = 0; i < Stat.values().length - 1; i++) {
-
-
+            Stack<Integer> caseStillCheckable = new Stack<>();
             ArrayList<Integer> pawnsPosition = getPawnsPositions(Stat.values()[i]);
             ArrayList<String> sidePositions = new ArrayList<>(
                     Arrays.asList(
@@ -126,15 +128,30 @@ public class Plateau {
                             "1+-1",
                             "0+-1"));
 
+            System.out.println(pawnsPosition);
             while (!pawnsPosition.isEmpty()) {
-                if (checkItForOnePosition(Stat.values()[i], pawnsPosition.get(0), sidePositions)){
+                if (checkItForOnePosition(Stat.values()[i], pawnsPosition.get(0), sidePositions, caseStillCheckable)){
+                    test();
+                    remettreToutFalse();
                     return Stat.values()[i];
                 }
                 pawnsPosition.remove(0);
+                test();
+                remettreToutFalse();
             }
-            remettreToutFalse();
         }
         return Stat.EMPTY;
+    }
+
+    private void test(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i< this.size; ++i){
+            sb.append(makeSpace(i + 1));
+            for (int j = 0; j < this.size; ++j)
+                sb.append((this.tab[i][j].isChecked()) ? "T": "F").append(" ");
+            sb.append("\n");
+        }
+        System.out.println(sb);
     }
 
     public int getNbOfUsableCase(){
