@@ -31,8 +31,9 @@ public class App {
             joueur_courant = get_joueur();
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
             plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
-            ihm.mettre_a_jour_plateau(plateau);
+            System.out.println(plateau.isWin());
             ihm.afficher_le_coup(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
+            ihm.mettre_a_jour_plateau(plateau);
             if (plateau.isWin() == Stat.WHITE) {
                 ihm.afficher_resultat(p1.getPawnColor().name(), p2.getPawnColor().name());
                 return;
@@ -47,9 +48,11 @@ public class App {
         //System.out.println(ihm.recuperer_type_de_joueur());
     }
     static private Player get_joueur(){
-
+        if (compteur_joueur >= 2){
+            compteur_joueur = 0;
+        }
+        int numPlayer = compteur_joueur % joueurs.size();
         ++compteur_joueur;
-        compteur_joueur = compteur_joueur % joueurs.size();
-        return joueurs.get(compteur_joueur);
+        return joueurs.get(numPlayer);
     }
 }
