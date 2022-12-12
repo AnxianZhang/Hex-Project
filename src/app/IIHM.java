@@ -1,9 +1,7 @@
 package app;
 
 import game.Plateau;
-import game.Stat;
 import player.Identity;
-import player.Player;
 
 public interface IIHM {
     Identity recuperer_type_de_joueur();
@@ -15,7 +13,4 @@ public interface IIHM {
     void afficher_le_coup(String nom_joueur, int choix);
 
     int demander_coup_a_jouer(Plateau p, String joueur);
-
-
-
 }

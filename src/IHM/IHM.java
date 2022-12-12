@@ -1,24 +1,19 @@
 package IHM;
 
-
 import app.IIHM;
 import game.Plateau;
 import player.Identity;
-
 import java.util.Scanner;
+
 public class IHM implements IIHM {
     private final Scanner sc = new Scanner(System.in);
-    public IHM(){
 
-    }
     @Override
     public Identity recuperer_type_de_joueur(){
-        final int  PREMIER_ELEMENT = 0;
-
         System.out.println("Choissisez le type du joueur par un numéro" );
         afficher_choix_possible();
 
-        int choix = demander_un_integer( PREMIER_ELEMENT, Identity.values().length);
+        int choix = demander_un_integer(Identity.values().length);
 
         return Identity.values()[choix];
     }
@@ -29,6 +24,7 @@ public class IHM implements IIHM {
             System.out.println("choix " + i + " pour l'" + Identity.values()[i].toString());
         }
     }
+
     @Override
     public void afficher_resultat(String gagnant, String perdant){
         System.out.println("Les " + gagnant + " ont gagner ");
@@ -49,37 +45,24 @@ public class IHM implements IIHM {
 
     @Override
     public int demander_coup_a_jouer(Plateau p, String joueur){
-        final int  PREMIERE_CASE_DU_PLATEAU = 0;
-        System.out.println(joueur +" choississez une case valide a jouer sur le plateau");
-        return demander_un_integer(PREMIERE_CASE_DU_PLATEAU,p.taille() * p.taille());
+        System.out.print("C'est au tour des " + joueur +" de jouer sur le plateau: ");
+        return demander_un_integer(p.taille() * p.taille());
     }
 
-
-
-    private int demander_un_integer(int borne_inferieur_incluse, int borne_superieur){
+    private int demander_un_integer(int borne_superieur){
         while (true) {
-
-            if(!IsInt()){}
-
+            if(!sc.hasNextInt()){
+                System.out.print("Un chiffre est requis, saisissez votre choix :");
+                sc.nextLine();
+            }
             else  {
                 int choix = sc.nextInt() ;
-                if (choix < borne_superieur && choix >=borne_inferieur_incluse ){
+                if (choix < borne_superieur && choix >= 0){
                     return choix;
                 }
                 System.out.print("Un nombre valide est requis, saisissez votre choix : ");
                 sc.nextLine();
             }
         }
-    }
-
-    private boolean IsInt(){
-        if (!sc.hasNextInt()) {
-
-            System.out.print("Un chiffre est requis, saisissez votre choix :");
-            sc.nextLine();
-            return false;
-
-        }
-        return true;
     }
 }

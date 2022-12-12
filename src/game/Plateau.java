@@ -78,13 +78,6 @@ public class Plateau {
         return pawsEndPosition.contains(positionToCheck);
     }
 
-    /**
-     *
-     * @param playerPawnColor
-     * @param pawnPosition
-     * @param endPositions
-     * @return
-     */
     private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions, Stack<Integer> s){
         int line = pawnPosition / this.size;
         int column = pawnPosition % this.size;
