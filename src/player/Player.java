@@ -8,6 +8,10 @@ public class Player{
     private final boolean isIA;
     private final Stat pawnColor;
 
+    /**
+     *
+     * @param type
+     */
     public Player(Identity type) {
         this.isIA = type == Identity.IA;
 
