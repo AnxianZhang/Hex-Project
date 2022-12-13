@@ -46,7 +46,11 @@ public interface IIHM {
      *
      * @see Plateau#taille()
      */
-    int resquestAMove(Plateau p, String player);
-    int demander_coup_a_jouer(Plateau p, String joueur);
-    int recuper_taille_plateau();
+    int requestAMove(Plateau p, String player);
+
+    /**
+     * Demande aux joueur la taille du tableau souhaite
+     * @return la taille
+     */
+    int requestPlateauSize();
 }

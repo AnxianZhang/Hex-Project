@@ -24,11 +24,12 @@ public class IHMConsole implements IIHM {
     /**
      * Recupere la valeur de la position où le joueur veut jouer
      *
+     * @param borne_inferieure_inclue debut du plateau
      * @param borne_superieur fin du plateau
      *
      * @return retourne un entier qui correspond au choix du joueur
      */
-    private int demander_un_integer(int borne_superieur){
+    private int requestAnInteger(int borne_inferieure_inclue, int borne_superieur){
         while (true) {
             if(!sc.hasNextInt()){
                 System.out.print("Un chiffre est requis, saisissez votre choix :");
@@ -36,7 +37,7 @@ public class IHMConsole implements IIHM {
             }
             else  {
                 int choix = sc.nextInt() ;
-                if (choix < borne_superieur && choix >= 0){
+                if (choix < borne_superieur && choix >= borne_inferieure_inclue){
                     return choix;
                 }
                 System.out.print("Un nombre valide est requis, saisissez votre choix : ");
@@ -50,7 +51,7 @@ public class IHMConsole implements IIHM {
         System.out.println("Choissisez le type du joueur par un numéro" );
         showAllPossibleChoices();
 
-        int choix = demander_un_integer(Identity.values().length);
+        int choix = requestAnInteger(0,Identity.values().length);
 
         return Identity.values()[choix];
     }
@@ -73,8 +74,14 @@ public class IHMConsole implements IIHM {
     }
 
     @Override
-    public int resquestAMove(Plateau p, String player){
-        System.out.println("C'est au tour des " + player +" de jouer sur le plateau: ");
-        return demander_un_integer(p.taille() * p.taille());
+    public int requestAMove(Plateau p, String player){
+        System.out.print("C'est au tour des " + player +" de jouer sur le plateau: ");
+        return requestAnInteger(0,p.taille() * p.taille());
+    }
+
+    @Override
+    public int requestPlateauSize() {
+        System.out.println("Veuillez indiquer la taille de la largeur du plateau entre 2 et 100 inclus");
+        return requestAnInteger(2,51);//taille minimale et maximale de la largeur du plateau
     }
 }

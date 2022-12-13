@@ -10,22 +10,21 @@ import player.Identity;
 import java.util.ArrayList;
 
 public class App {
-    static private Plateau plateau ;
-    static private ArrayList<Player> joueurs = new ArrayList<>();
-    static private Player joueur_courant;
+    static private final ArrayList<IPlayer> joueurs = new ArrayList<>();
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
-        IIHM ihm = new IHM();
-        plateau = new Plateau(ihm.recuper_taille_plateau());
+        IIHM ihm = new IHMConsole();
+        Plateau plateau = new Plateau(ihm.requestPlateauSize());
         IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
         IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
+
         joueurs.add(p1);
         joueurs.add(p2);
-        ihm.refreshPlateau(plateau);
 
+        ihm.refreshPlateau(plateau);
         while (!plateau.isFull()) {
-            joueur_courant = get_joueur();
+            IPlayer joueur_courant = get_joueur();
 
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
             while( !plateau.isEmpty(choix_du_joueur_courant / plateau.taille() , choix_du_joueur_courant % plateau.taille())){

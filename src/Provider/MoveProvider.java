@@ -22,6 +22,6 @@ public class MoveProvider {
 
     }
     public int provide_coup_HUMAN(Stat couleur , Plateau p){
-        return console_joueur.resquestAMove(p,couleur.name());
+        return console_joueur.requestAMove(p,couleur.name());
     }
 }
