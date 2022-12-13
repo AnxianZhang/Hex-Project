@@ -9,38 +9,37 @@ public class Case {
     }
 
     /**
-     * Méthode qui renvoie le statut de la case (BLACK, WHITE, VIDE)
+     * Renvoie le statut de la case (BLACK, WHITE, EMPTY)
      *
-     * @return retourne un objet de la classe enum Stat
+     * @return la stat
      */
     public Stat getStat() {
         return stat;
     }
 
     /**
-     * Méthode qui renvoie si la case a été vérifié ou non
-     * de base à false
+     * Renvoie un boolean qui indique si la case a deja ete
+     * verifie
      *
-     * @return retourne un booléen : true si case vérifiée sinon false
+     * @return son etat
      */
     public boolean isChecked() {
         return this.isChecked;
     }
 
     /**
-     * Méthode qui permet de changer le statut de la case si on la vérifiée
+     * Change le statut de la case
      *
-     * @param isChecked dire si on mets true ou false à la case
+     * @param isChecked le nouvel statut
      */
     public void setChecked(boolean isChecked){
         this.isChecked = isChecked;
     }
 
     /**
-     * Méthode qui permet de changer le statut de la case en posant un pion
-     * de la couleur indiquée en paramètre
+     * Change la contenance de la case (elle peut etre WHITE BLACK ou EMPTY)
      *
-     * @param pawnColor couleur du pion qu'on veut poser
+     * @param pawnColor nouveau contenue
      */
     public void play(Stat pawnColor) {
         this.stat = pawnColor;
