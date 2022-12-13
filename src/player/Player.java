@@ -1,21 +1,14 @@
 package player;
 
-import Provider.Coup_Provider;
+import Provider.MoveProvider;
 import game.Plateau;
 import game.Stat;
 
 public abstract class Player{
-    protected Coup_Provider provider = new Coup_Provider();
+    protected MoveProvider provider = new MoveProvider();
     private static boolean isFirstColor = true;
     protected final Stat pawnColor;
 
-    /**
-     * Ce constructeur permet d'initialiser tous les paramètres de la classe
-     * en fonction du type du joueur
-     * isIA est initialisé à true si la condition : le type du paramètre est égal à IA
-     * est vraie.
-     * isFirstColor permet de savoir qui va commencer
-     */
     public Player() {
         if(isFirstColor){
             this.pawnColor = Stat.WHITE;
@@ -28,18 +21,18 @@ public abstract class Player{
     }
 
     /**
-     * Méthode qui indique la couleur du pion
+     * Indique la couleur du pion
      *
-     * @return retourne un objet de la classe Stat (WHITE,BLACK,VIDE)
+     * @return la couleur du pion (WHITE,BLACK)
      */
     public Stat getPawnColor(){
         return this.pawnColor;
     }
 
     /**
-     * Méthode qui indique le choix du joueur pour la position de son pion
+     * Indique le choix du joueur
      *
-     * @return retourne un entier en référence à la position sur le plateau
+     * @return retourne son choix
      */
     public abstract int getChoice(Plateau p) ;
 }

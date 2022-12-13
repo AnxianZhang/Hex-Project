@@ -20,8 +20,8 @@ public class App {
         int choix_du_joueur_courant;
         IIHM ihm = new IHM();
 
-        Player p1 = ihm.requestPlayerTypr() == Identity.HUMAN? new Human(): new IA(); // imparaire = WHITE
-        Player p2 = ihm.requestPlayerTypr() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
+        Player p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
+        Player p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
         joueurs.add(p1);
         joueurs.add(p2);
         ihm.refreshPlateau(plateau);

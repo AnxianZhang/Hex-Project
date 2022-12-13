@@ -6,10 +6,9 @@ import game.Stat;
 
 import java.util.Random;
 
-public class Coup_Provider {
+public class MoveProvider {
     protected IHM console_joueur = new IHM();
     public int provide_coup_AI(Plateau plateau) {
-
         Random r = new Random();
         int randCase = r.nextInt(plateau.getNbOfUsableCase()) + 1;
         int ctp = 0;
@@ -25,5 +24,4 @@ public class Coup_Provider {
     public int provide_coup_HUMAN(Stat couleur , Plateau p){
         return console_joueur.resquestAMove(p,couleur.name());
     }
-
 }

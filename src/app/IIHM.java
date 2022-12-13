@@ -10,7 +10,7 @@ public interface IIHM {
      * @return le type choisit par l'utilisateur
      *
      */
-    Identity requestPlayerTypr();
+    Identity requestPlayerType();
 
     /**
      * Afficher les résultats de la partie.
