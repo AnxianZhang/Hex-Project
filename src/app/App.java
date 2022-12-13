@@ -10,15 +10,14 @@ import player.Identity;
 import java.util.ArrayList;
 
 public class App {
-    static final int TAILLE_JEU = 4;
-    static Plateau plateau = new Plateau(TAILLE_JEU);
-    static ArrayList<IPlayer> joueurs = new ArrayList<>();
-    static IPlayer joueur_courant;
+    static private Plateau plateau ;
+    static private ArrayList<Player> joueurs = new ArrayList<>();
+    static private Player joueur_courant;
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
-        IIHM ihm = new IHMConsole();
-
+        IIHM ihm = new IHM();
+        plateau = new Plateau(ihm.recuper_taille_plateau());
         IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
         IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
         joueurs.add(p1);
@@ -27,7 +26,13 @@ public class App {
 
         while (!plateau.isFull()) {
             joueur_courant = get_joueur();
+
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
+            while( !plateau.isEmpty(choix_du_joueur_courant / plateau.taille() , choix_du_joueur_courant % plateau.taille())){
+                choix_du_joueur_courant = joueur_courant.getChoice(plateau);
+            }
+
+
             plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
             ihm.showPlayedPosition(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
             ihm.refreshPlateau(plateau);

@@ -47,4 +47,6 @@ public interface IIHM {
      * @see Plateau#taille()
      */
     int resquestAMove(Plateau p, String player);
+    int demander_coup_a_jouer(Plateau p, String joueur);
+    int recuper_taille_plateau();
 }
