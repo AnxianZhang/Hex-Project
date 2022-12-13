@@ -165,7 +165,7 @@ public class Plateau {
      * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
      * @see Case#isChecked() 
      * @see Case#setChecked(boolean) 
-     * @see #checkItForOnePosition(Stat, int, ArrayList) 
+     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack) 
      */
     private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions, Stack<Integer> s){
         int line = pawnPosition / this.size;
@@ -208,13 +208,11 @@ public class Plateau {
      * Cette méthode nous indique s'il y a un chemin qui mène à la dernière case
      * en regdardant autour de la case s'il y a des cases remplis.
      *
-     * @param playerPawn couleur du pion du joueur
-     *
      * @return retourne true s'il y a un chemin jusqu'à la dernière case
      * 
      * @see #getPawnsPositions(Stat) 
      * @see #isEmpty(int, int) 
-     * @see #checkItForOnePosition(Stat, int, ArrayList) 
+     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack) 
      * @see #remettreToutFalse() 
      */
     public Stat isWin(){
@@ -230,15 +228,15 @@ public class Plateau {
                             "1+-1",
                             "0+-1"));
 
-            System.out.println(pawnsPosition);
+            //System.out.println(pawnsPosition);
             while (!pawnsPosition.isEmpty()) {
                 if (checkItForOnePosition(Stat.values()[i], pawnsPosition.get(0), sidePositions, caseStillCheckable)){
-                    test();
+                    //test();
                     remettreToutFalse();
                     return Stat.values()[i];
                 }
                 pawnsPosition.remove(0);
-                test();
+                //test();
                 remettreToutFalse();
             }
         }

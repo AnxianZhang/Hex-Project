@@ -15,7 +15,7 @@ public class IHM implements IIHM {
      * @return retourne un objet humain ou IA de type Identity, ce sera le type du joueur
      *
      * @see #afficher_choix_possible()
-     * @see #demander_un_integer(int, int)
+     * @see #demander_un_integer(int)
      * @see Identity#values()
      */
     @Override
@@ -34,7 +34,6 @@ public class IHM implements IIHM {
      *
      * @see Identity#values()
      * @see Identity#toString()
-     * @see Stat#values()
      */
     private void afficher_choix_possible(){
 
@@ -49,9 +48,6 @@ public class IHM implements IIHM {
      *
      * @param gagnant paramètre qui fait référence à un joueur
      * @param perdant paramètre qui fait référence à un joueur
-     *
-     * @see Player#getPawnColor()
-     * @see Stat#name()
      */
     @Override
     public void afficher_resultat(String gagnant, String perdant){
@@ -73,15 +69,13 @@ public class IHM implements IIHM {
     /**
      * Cette méthode permet d'afficher le coup d'un joueur, où est-ce qu'il a joué ?
      *
-     * @param joueur le joueur qui a joué
+     * @param player_name la couleur du joueur
      * @param choix la case où le joueur à joué
      *
-     * @see Stat#name()
-     * @see Player#getPawnColor()
      */
     @Override
     public void afficher_le_coup(String player_name, int choix){
-        System.out.println( player_name + " ont jouées à la case " + choix);
+        System.out.println(player_name + " ont jouées à la case " + choix);
     }
 
     /**
@@ -93,9 +87,6 @@ public class IHM implements IIHM {
      * @return retourne un entier entre 0 et la taille du plteau, c'est là case
      * où le joueur va jouer
      *
-     * @see Stat#name()
-     * @see Player#getPawnColor()
-     * @see #demander_un_integer(int, int)
      * @see Plateau#taille()
      */
     @Override
@@ -107,14 +98,9 @@ public class IHM implements IIHM {
     /**
      * Cette méthode va récupérer la valeur de la position où le joueur veut jouer
      *
-     * @param borne_inferieur_incluse début du plateau
      * @param borne_superieur fin du plateau
      *
      * @return retourne un entier qui correspond au choix du joueur
-     *
-     * @see #IsInt() méthode qui va vérifier que c'est un entier
-     * @see Scanner#nextInt()
-     * @see Scanner#nextLine()
      */
     private int demander_un_integer(int borne_superieur){
         while (true) {

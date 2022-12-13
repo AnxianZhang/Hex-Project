@@ -7,6 +7,7 @@ import game.Stat;
 public abstract class Player{
     protected Coup_Provider provider = new Coup_Provider();
     private static boolean isFirstColor = true;
+    protected final Stat pawnColor;
 
     /**
      * Ce constructeur permet d'initialiser tous les paramètres de la classe
@@ -14,8 +15,6 @@ public abstract class Player{
      * isIA est initialisé à true si la condition : le type du paramètre est égal à IA
      * est vraie.
      * isFirstColor permet de savoir qui va commencer
-     *
-     * @param type objet human ou ia de l'enum Identity
      */
     public Player() {
         if(isFirstColor){
