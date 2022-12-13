@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class App {
     static final int TAILLE_JEU = 4;
-    static Plateau plateau ;
-    static ArrayList<Player> joueurs = new ArrayList<>();
-    static Player joueur_courant;
+    static private Plateau plateau ;
+    static private ArrayList<Player> joueurs = new ArrayList<>();
+    static private Player joueur_courant;
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
@@ -29,7 +29,13 @@ public class App {
 
         while (!plateau.isFull()) {
             joueur_courant = get_joueur();
+
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
+            while( !plateau.isEmpty(choix_du_joueur_courant / plateau.taille() , choix_du_joueur_courant % plateau.taille())){
+                choix_du_joueur_courant = joueur_courant.getChoice(plateau);
+            }
+
+
             plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
             ihm.afficher_le_coup(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
             ihm.mettre_a_jour_plateau(plateau);
@@ -45,7 +51,7 @@ public class App {
     }
 
     static private Player get_joueur(){
-        if (compteur_joueur >= 2){
+        if (compteur_joueur >= joueurs.size()){
             compteur_joueur = 0;
         }
         int numPlayer = compteur_joueur % joueurs.size();

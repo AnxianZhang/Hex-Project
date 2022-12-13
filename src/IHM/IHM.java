@@ -98,8 +98,9 @@ public class IHM implements IIHM {
 
     @Override
     public int recuper_taille_plateau() {
-        System.out.println("Veuillez indiquer la taille de la largeur du plateau entre 2 et 100 inclus");
-        return demander_un_integer(2,51);//taille minimale et maximale de la largeur du plateau
+        final int TAILLE_MAX = 26 , TAILLE_MIN = 2;
+        System.out.println("Veuillez indiquer la taille de la largeur du plateau entre 2 et 26 inclus");
+        return demander_un_integer(TAILLE_MIN,TAILLE_MAX + 1);//taille minimale et maximale de la largeur du plateau
     }
 
     /**
