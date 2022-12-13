@@ -12,13 +12,14 @@ import java.util.ArrayList;
 
 public class App {
     static final int TAILLE_JEU = 4;
-    static Plateau plateau = new Plateau(TAILLE_JEU);
+    static Plateau plateau ;
     static ArrayList<Player> joueurs = new ArrayList<>();
     static Player joueur_courant;
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
         IIHM ihm = new IHM();
+        plateau = new Plateau(ihm.recuper_taille_plateau());
 
         Player p1 = ihm.recuperer_type_de_joueur() == Identity.HUMAN? new Human(): new IA(); // imparaire = WHITE
         Player p2 = ihm.recuperer_type_de_joueur() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK

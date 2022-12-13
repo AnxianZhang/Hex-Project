@@ -15,7 +15,7 @@ public class IHM implements IIHM {
      * @return retourne un objet humain ou IA de type Identity, ce sera le type du joueur
      *
      * @see #afficher_choix_possible()
-     * @see #demander_un_integer(int)
+     * @see #demander_un_integer(int,int)
      * @see Identity#values()
      */
     @Override
@@ -23,7 +23,7 @@ public class IHM implements IIHM {
         System.out.println("Choissisez le type du joueur par un numéro" );
         afficher_choix_possible();
 
-        int choix = demander_un_integer(Identity.values().length);
+        int choix = demander_un_integer(0,Identity.values().length);
 
         return Identity.values()[choix];
     }
@@ -82,7 +82,7 @@ public class IHM implements IIHM {
      * Cette méthode demande aux joueurs où est-ce qu'ils veulent poser leur pion
      *
      * @param p le plateau sur lequelle les joueurs jouent
-     * @param joueur le joueur à qui on demande où il va jouer
+     * @param joueur le nom du joueur à qui on demande où il va jouer
      *
      * @return retourne un entier entre 0 et la taille du plteau, c'est là case
      * où le joueur va jouer
@@ -92,7 +92,14 @@ public class IHM implements IIHM {
     @Override
     public int demander_coup_a_jouer(Plateau p, String joueur){
         System.out.print("C'est au tour des " + joueur +" de jouer sur le plateau: ");
-        return demander_un_integer(p.taille() * p.taille());
+        return demander_un_integer(0,p.taille() * p.taille());
+    }
+
+
+    @Override
+    public int recuper_taille_plateau() {
+        System.out.println("Veuillez indiquer la taille de la largeur du plateau entre 2 et 100 inclus");
+        return demander_un_integer(2,51);//taille minimale et maximale de la largeur du plateau
     }
 
     /**
@@ -102,7 +109,7 @@ public class IHM implements IIHM {
      *
      * @return retourne un entier qui correspond au choix du joueur
      */
-    private int demander_un_integer(int borne_superieur){
+    private int demander_un_integer(int borne_inferieure_inclue,int borne_superieur){
         while (true) {
             if(!sc.hasNextInt()){
                 System.out.print("Un chiffre est requis, saisissez votre choix :");

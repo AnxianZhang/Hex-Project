@@ -13,4 +13,5 @@ public interface IIHM {
     void afficher_le_coup(String nom_joueur, int choix);
 
     int demander_coup_a_jouer(Plateau p, String joueur);
+    int recuper_taille_plateau();
 }
