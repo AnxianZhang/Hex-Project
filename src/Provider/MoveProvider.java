@@ -1,13 +1,13 @@
 package Provider;
 
-import IHM.IHM;
+import IHM.IHMConsole;
 import game.Plateau;
 import game.Stat;
 
 import java.util.Random;
 
 public class MoveProvider {
-    protected IHM console_joueur = new IHM();
+    protected IHMConsole console_joueur = new IHMConsole();
     public int provide_coup_AI(Plateau plateau) {
         Random r = new Random();
         int randCase = r.nextInt(plateau.getNbOfUsableCase()) + 1;

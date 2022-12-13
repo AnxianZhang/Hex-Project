@@ -1,6 +1,6 @@
 package app;
 
-import IHM.IHM;
+import IHM.IHMConsole;
 import game.Plateau;
 import game.Stat;
 import player.Human;
@@ -17,7 +17,7 @@ public class App {
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
-        IIHM ihm = new IHM();
+        IIHM ihm = new IHMConsole();
 
         IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
         IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK

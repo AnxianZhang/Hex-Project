@@ -5,24 +5,24 @@ import game.Plateau;
 import player.Identity;
 import java.util.Scanner;
 
-public class IHM implements IIHM {
+public class IHMConsole implements IIHM {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Cette méthode permet simplement d'afficher à l'utilisateur les choix
+     * Affiche à l'utilisateur les choix
      * de type de joueur qui peut choisir. C'est une méthode d'affichage.
      *
      * @see Identity#values()
      * @see Identity#toString()
      */
-    private void afficher_choix_possible(){
-        for (int i = 0; i < Identity.values().length ;++i){
+    private void showAllPossibleChoices(){
+        for (int i = 0; i < Identity.values().length; ++i){
             System.out.println("choix " + i + " pour l'" + Identity.values()[i].toString());
         }
     }
 
     /**
-     * Cette méthode va récupérer la valeur de la position où le joueur veut jouer
+     * Recupere la valeur de la position où le joueur veut jouer
      *
      * @param borne_superieur fin du plateau
      *
@@ -48,7 +48,7 @@ public class IHM implements IIHM {
     @Override
     public Identity requestPlayerType(){
         System.out.println("Choissisez le type du joueur par un numéro" );
-        afficher_choix_possible();
+        showAllPossibleChoices();
 
         int choix = demander_un_integer(Identity.values().length);
 
@@ -74,7 +74,7 @@ public class IHM implements IIHM {
 
     @Override
     public int resquestAMove(Plateau p, String player){
-        System.out.print("C'est au tour des " + player +" de jouer sur le plateau: ");
+        System.out.println("C'est au tour des " + player +" de jouer sur le plateau: ");
         return demander_un_integer(p.taille() * p.taille());
     }
 }
