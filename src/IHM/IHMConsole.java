@@ -5,6 +5,14 @@ import game.Plateau;
 import player.Identity;
 import java.util.Scanner;
 
+/**
+ * Brief: Classe IHMConsole, permet tout interaction entre
+ * le(s) joueur(s) et le jeu
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 8
+ * @since 13/12/2022
+ */
 public class IHMConsole implements IIHM {
     private final Scanner sc = new Scanner(System.in);
 

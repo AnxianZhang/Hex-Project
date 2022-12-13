@@ -3,6 +3,14 @@ package app;
 import game.Plateau;
 import player.Identity;
 
+/**
+ * Brief: Interfacte IIHM permettant d'utiliser plus
+ * plus facilment les IHM
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 4
+ * @since 13/12/2022
+ */
 public interface IIHM {
     /**
      * Proposer a l'utilisateur de choisir un typesde joueurs (IA ou humain)

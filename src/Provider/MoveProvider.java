@@ -6,6 +6,13 @@ import game.Stat;
 
 import java.util.Random;
 
+/**
+ * Brief: Classe permettan de récupérer le coup d'un joueur
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 1
+ * @since 13/12/2022
+ */
 public class MoveProvider {
     protected IHMConsole playerConsole = new IHMConsole();
 

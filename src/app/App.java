@@ -9,6 +9,14 @@ import player.Identity;
 
 import java.util.ArrayList;
 
+/**
+ * Brief: Application qui permet de jouer au jeu
+ * HEX
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 10
+ * @since 13/12/2022
+ */
 public class App {
     static private final ArrayList<IPlayer> joueurs = new ArrayList<>();
     static private int numPlayer = 0; // numeros du joueur qui doit jouer
@@ -26,7 +34,6 @@ public class App {
         ++App.numPlayer;
         return joueurs.get(numPlayer);
     }
-
 
     public static void main(String[] args) {
         int currentPlayerChoice;

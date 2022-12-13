@@ -1,5 +1,13 @@
 package game;
 
+/**
+ * Brief: Classe Case permettant de crer les
+ * case d'un plateau
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 4
+ * @since 13/12/2022
+ */
 public class Case {
     private Stat stat;
     private boolean isChecked = false;

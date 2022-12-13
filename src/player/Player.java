@@ -4,6 +4,14 @@ import Provider.MoveProvider;
 import app.IPlayer;
 import game.Stat;
 
+/**
+ * Brief: Classe Player permettan de creer des joueurs
+ * diferent type de joueur
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 9
+ * @since 13/12/2022
+ */
 public abstract class Player implements IPlayer {
     protected MoveProvider provider = new MoveProvider();
     private static boolean isFirstColor = true;

@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
+/**
+ * Brief: Classe Plateau permettan de creer une
+ * plateau de jeu et d'y jouer
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 20
+ * @since 13/12/2022
+ */
 public class Plateau {
     private int nbOfUsableCase;
     private final int size;
