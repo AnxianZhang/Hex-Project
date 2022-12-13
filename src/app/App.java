@@ -11,7 +11,6 @@ import player.Player;
 import java.util.ArrayList;
 
 public class App {
-    static final int TAILLE_JEU = 4;
     static private Plateau plateau ;
     static private ArrayList<Player> joueurs = new ArrayList<>();
     static private Player joueur_courant;
