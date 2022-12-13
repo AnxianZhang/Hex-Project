@@ -12,8 +12,8 @@ public interface IPlayer {
     Stat getPawnColor();
 
     /**
-     * Indique le choix du joueur elle sera differente
-     * selon le type de joueur choisi(IA, HUMAN ...)
+     * Retourn le choix qu'aura effectuer le joueur, la
+     * méthede sera spécifier dans les sous classes
      *
      * @return retourne son choix
      */
