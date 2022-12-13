@@ -22,9 +22,8 @@ public class Plateau {
     }
 
     /**
-     * Cette méthode parcours le tableau et le rempli avec des cases vides
+     * Remplit le tableau de nouvelle case
      *
-     * @see Case#Case() appele du constructeur de case, initialisé à vide
      */
     private void initTab() {
         for (int i = 0; i < this.size; ++i)
@@ -33,54 +32,47 @@ public class Plateau {
     }
 
     /**
-     * Cette méthode indique si une case est vide ou non
+     * Indique si une case est vide ou non
      *
-     * @param line ligne où l'on veut regarder
-     * @param column colonne où l'on veut regarder
+     * @param line ligne ou l'on veut regarder
+     * @param column colonne ou l'on veut regarder
      *
-     * @return retourne un booléen : true si la case est vide et false si
-     * elle ne l'est pas
+     * @return vrais si elle vide sinon false
      *
-     * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
+     * @see Case#getStat()
      */
     public boolean isEmpty(int line, int column) {
         return this.tab[line][column].getStat() == Stat.EMPTY;
     }
 
     /**
-     * Cette méthode indique si le plateau est plein, c'est à dire qu'aucune
-     * case n'est jouable
+     * Indique si le plateau est plein
      *
-     * @return retourne true si le plateau est plein, false sinon
+     * @return true si le plateau est plein, false sinon
      */
     public boolean isFull() {
         return this.nbOfUsableCase == 0;
     }
 
     /**
-     * Cette méthode donne la taille du plateau
+     * Donne la taille du plateau
      *
-     * @return retourne la taille de la ligne ou de la colonne
+     * @return le taille
      */
     public int taille() {
         return this.size;
     }
 
     /**
-     * Cette méthode permet de jouer sur une case en fonction du joueur, elle renvoie
-     * argument exception si la case
-     * choisie nc'est pas jouable.
+     * Permet de jouer sur une case en fonction du joueur, elle renvoie
+     * argument exception si la case choisie n'est pas jouable.
      *
      * @param numCase cela indique sur quelle case le joueur va jouer
-     * @param s indique quel joueur joue en indiquant sa couleur, WHITE OU BLACK.
+     * @param s indique quel joueur joue avec la couleur de son pion WHITE OU BLACK.
      *
-     * @throws Unplayable le joueur ne peut pas jouer si le numéro de case n'existe
-     * pas : s'il est inférieur à 0,
-     * s'il dépasse le plateau de jeu ou si la case n'est pas disponible.
+     * @throws Unplayable lorsque le joueur joue sur une case non jouable
      *
-     * @see Case#play(Stat) : la méthode play de la classe Case, change si toutes
-     * les conditions le veulent, la case de la couleur du joueur qui a joué et
-     * l'on retire une case du nombre des cases à jouées.
+     * @see Case#play(Stat)
      * @see #isEmpty(int, int)
      */
     public void play(int numCase, Stat s) throws Unplayable{
@@ -94,107 +86,98 @@ public class Plateau {
     }
 
     /**
-     *Cette méthode permet de remplir une liste avec les cases de la première
+     * Remplis une liste avec les cases de la première
      * ligne ou colonne du plateau en fonction des couleurs des cases.
      * En bref, pour connaitre les positions des pions.
      *
-     * @param color la couleur du joueur à vérifier
+     * @param color la couleur du pion du joueur
      *
-     * @return retourne une ArrayList d'entier qui retranscrit la première ligne
-     * ou colonne
-     * du plateau en différenciant les couleurs de cases
+     * @return la liste le la premiere colonne ou ligne
      *
-     * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
+     * @see Case#getStat()
      */
-    private ArrayList<Integer> getPawnsPositions(Stat color){
+    private ArrayList<Integer> getPawnsStartPositions(Stat color){
         ArrayList<Integer> pawnsPosition = new ArrayList<>();
         for (int i = 0; i < this.size; ++i){
             if (color == Stat.BLACK) {
-                if (tab[i/this.size][i%this.size].getStat() == Stat.BLACK)
+                if (this.tab[i / this.size][i % this.size].getStat() == Stat.BLACK)
                     pawnsPosition.add(i);
             }
             else
-                if (tab[(i * this.size)/this.size][(i * this.size)%this.size].getStat() == Stat.WHITE)
+                if (this.tab[(i * this.size) / this.size][(i * this.size) % this.size].getStat() == Stat.WHITE)
                     pawnsPosition.add(i * this.size);
         }
         return pawnsPosition;
     }
 
     /**
-     * Cette méthode permet de remplir une liste avec les cases de la dernière
-     * ligne ou colonne du plateau en fonction des couleurs des cases. Ensuite,
-     * la méthode regarde si une case en particulier est dans cette liste.
+     * Remplit une liste avec les cases de la dernière
+     * ligne ou colonne du plateau en fonction des couleurs des cases.
      *
      * @param color couleur de la case à vérifier
-     * @param positionToCheck position sur la plateau à vérifier
      *
-     * @return return un booléen : true si la liste contient la positition spécifique,
-     * false sinon
+     * @return la liste de poistion de fin
      *
-     * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
+     * @see Case#getStat()
      */
-    // cette fonction peux être juste appeler une fois dans isWin, puis le passer en param de la fonction de récurence
-    private boolean isInEndPosition(Stat color, int positionToCheck){
+    private ArrayList<Integer> getPawnsEndPositions(Stat color){
         ArrayList<Integer> pawsEndPosition = new ArrayList<>();
         for (int i = 0; i < this.size; ++i){
             if (color == Stat.BLACK){
-                if (tab[(this.size * this.size - i - 1)/this.size][(this.size * this.size - i - 1)%this.size].getStat() == Stat.BLACK)
+                if (this.tab[(this.size * this.size - i - 1)/this.size][(this.size * this.size - i - 1)%this.size].getStat() == Stat.BLACK)
                     pawsEndPosition.add(this.size * this.size - i - 1);
             }
             else
-                if (tab[(i * this.size + this.size - 1)/this.size][(i * this.size + this.size - 1)%this.size].getStat() == Stat.WHITE)
+                if (this.tab[(i * this.size + this.size - 1)/this.size][(i * this.size + this.size - 1)%this.size].getStat() == Stat.WHITE)
                     pawsEndPosition.add(i * this.size + this.size - 1);
         }
-        return pawsEndPosition.contains(positionToCheck);
+        return pawsEndPosition;
     }
 
     /**
-     * Cette méthode est la méthode principale du plateau, c'est celle qui relie
-     * la méthode pour vérifier les premières lignes et colonnes avec la méthode
-     * pour les dernières lignes et colonnes. Cette méthode sera essentiel, elle
-     * va vérifier si un pions a gagné ou pas.
+     * Verifit recursivement si un la couleur d'un pions est gagnant ou pas
      *
      * @param playerPawnColor la couleur du pion du joueur
      * @param pawnPosition la position du pion
-     * @param endPositions la dernière colonne du plateau
+     * @param sitePos position des case voisin
+     * @param s pile de toutes les cases encore visitable
+     * @param pawnsEndPos les positions de la derniere colonne ou ligne
      *
-     * @return retourne un booléen si oui ou non le pion passé en paramètre a gagné
-     *         si true le joueur a gagné sinon false
+     * @return vrais si le pions a gagner sinon false
      *
-     * @see #isInEndPosition(Stat, int) 
-     * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
+     * @see Case#getStat()
      * @see Case#isChecked() 
      * @see Case#setChecked(boolean) 
-     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack) 
+     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack, ArrayList)
      */
-    private boolean checkItForOnePosition(Stat playerPawnColor, int pawnPosition, ArrayList<String> endPositions, Stack<Integer> s){
+    private boolean checkItForOnePosition(
+            Stat playerPawnColor, int pawnPosition, ArrayList<String> sitePos,
+            Stack<Integer> s, ArrayList<Integer> pawnsEndPos){
         int line = pawnPosition / this.size;
         int column = pawnPosition % this.size;
 
         this.tab[line][column].setChecked(true);
 
-        if(isInEndPosition(playerPawnColor, pawnPosition)) return true;
+        if(pawnsEndPos.contains(pawnPosition)) return true;
         if (this.tab[line][column].getStat() != playerPawnColor) return false;
 
         for (int i = -1; i < 2; ++i)
             for (int j = -1; j < 2; ++j) {
-                if (line + i < this.size && line + i >= 0 &&
-                        column + j < this.size && column + j >= 0 &&
-                        endPositions.contains(i + "+" + j)) // si le couple i j se trouve bien au tour d'une position existante
+                if (line + i < this.size && line + i >= 0 && column + j < this.size && column + j >= 0 &&
+                        sitePos.contains(i + "+" + j)) // si le couple i j se trouve bien au tour d'une position existante
                     if (this.tab[line + i][column + j].getStat() == playerPawnColor &&
                             !this.tab[line + i][column + j].isChecked()) {
                         s.push(pawnPosition);
-                        return checkItForOnePosition(playerPawnColor, ((line + i) * this.size) + (column + j), endPositions, s);
+                        return checkItForOnePosition(playerPawnColor,
+                                ((line + i) * this.size) + (column + j), sitePos, s, pawnsEndPos);
                     }
             }
-        if(s.isEmpty()) return false;
-        return checkItForOnePosition(playerPawnColor, s.pop(), endPositions, s);
+        if(s.isEmpty()) return false; // rentre dans la condition s'il n'y a plus de case visitable
+        return checkItForOnePosition(playerPawnColor, s.pop(), sitePos, s, pawnsEndPos);
     }
 
     /**
-     * Cette méthode remet toutes les cases du plateau à checked false,
-     * c'est à dire que l'état des cases ne deviennent plus verifier,
-     * il faudra re-check tout le plateau
+     * Remet toutes les cases du plateau a checked false
      *
      * @see Case#setChecked(boolean)
      */
@@ -205,20 +188,20 @@ public class Plateau {
     }
 
     /**
-     * Cette méthode nous indique s'il y a un chemin qui mène à la dernière case
-     * en regdardant autour de la case s'il y a des cases remplis.
+     * Indique si un joueur et gagnant ou pas pour chaque case de debut
      *
      * @return retourne true s'il y a un chemin jusqu'à la dernière case
      * 
-     * @see #getPawnsPositions(Stat) 
+     * @see #getPawnsStartPositions(Stat)
      * @see #isEmpty(int, int) 
-     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack) 
+     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack, ArrayList)
      * @see #remettreToutFalse() 
      */
     public Stat isWin(){
         for (int i = 0; i < Stat.values().length - 1; i++) {
             Stack<Integer> caseStillCheckable = new Stack<>();
-            ArrayList<Integer> pawnsPosition = getPawnsPositions(Stat.values()[i]);
+            ArrayList<Integer> pawnsStartPosition = getPawnsStartPositions(Stat.values()[i]);
+            ArrayList<Integer> pawnsEndPosition = getPawnsEndPositions(Stat.values()[i]);
             ArrayList<String> sidePositions = new ArrayList<>(
                     Arrays.asList(
                             "-1+0",
@@ -227,66 +210,51 @@ public class Plateau {
                             "1+0",
                             "1+-1",
                             "0+-1"));
-
-            //System.out.println(pawnsPosition);
-            while (!pawnsPosition.isEmpty()) {
-                if (checkItForOnePosition(Stat.values()[i], pawnsPosition.get(0), sidePositions, caseStillCheckable)){
-                    //test();
-                    remettreToutFalse();
+            while (!pawnsStartPosition.isEmpty()) {
+                remettreToutFalse();
+                if (checkItForOnePosition(Stat.values()[i], pawnsStartPosition.get(0),
+                        sidePositions, caseStillCheckable, pawnsEndPosition)){
                     return Stat.values()[i];
                 }
-                pawnsPosition.remove(0);
-                //test();
-                remettreToutFalse();
+                pawnsStartPosition.remove(0);
             }
         }
         return Stat.EMPTY;
     }
 
-    private void test(){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i< this.size; ++i){
-            sb.append(makeSpace(i + 1));
-            for (int j = 0; j < this.size; ++j)
-                sb.append((this.tab[i][j].isChecked()) ? "T": "F").append(" ");
-            sb.append("\n");
-        }
-        System.out.println(sb);
-    }
-
     /**
-     * Cette méthode nous indique le nombre de case jouable sur le plateau
+     * Retourne le nombre de case jouable sur le plateau
      *
-     * @return retourne un entier du nombre de cases jouables
+     * @return le nombre de case
      */
     public int getNbOfUsableCase(){
         return this.nbOfUsableCase;
     }
 
     /**
-     * Cette méthode permet de faire des espaces le nombre de fois que l'on souhaite.
-     * Elle sera utile pour le toString de la classe.
+     * Permet de creer les espace necessaire en contion du numeros
+     * de ligne pour l'affichage en console
      *
-     * @param numLine le nombre de ligne
+     * @param numLine numeros de ligne
      *
-     * @return retourne des espaces dans une chaine de caractère
+     * @return retourne des espaces dans une chaine de caractere
      */
     private String makeSpace(int numLine) {
         return " ".repeat(Math.max(0, numLine - 1));
     }
 
     /**
-     * Cette méthode permet de remplir le toString avec des lettres
-     * en fonction de la couleur des pions pour chaque position sur le plateau
+     * Retourne la lettre correspondante selon la
+     * stat du pion dans le tableau
      *
-     * @param line ligne où l'on veut regarder
-     * @param column colonne où l'on veut regarder
+     * @param line ligne tu tableau
+     * @param column colonne du tableau
      *
      * @return retourne B pour le pion BLACK
      *         retourne W pour le pion WHITE
      *         retourne un point si la case est vide
      *
-     * @see Case#getStat() permet de retourner le statut de la case (empty, black ou white)
+     * @see Case#getStat()
      *
      */
     private String stateOfAPosition(int line, int column) {
@@ -296,10 +264,9 @@ public class Plateau {
     }
 
     /**
-     * Méthode toString qui permet un affichage lisible du plateau grâce
-     * aux méthodes ci-dessus et un stringbuilder pour de la facilité
+     * Permet l'affichage en console du tableau
      *
-     * @return retourne une chaine de caractère présentant le tableau avec
+     * @return retourne une chaine de caractère presentant le tableau avec
      * tous les pions et les cases vides
      *
      * @see #makeSpace(int)
