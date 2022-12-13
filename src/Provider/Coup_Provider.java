@@ -23,7 +23,7 @@ public class Coup_Provider {
 
     }
     public int provide_coup_HUMAN(Stat couleur , Plateau p){
-        return console_joueur.demander_coup_a_jouer(p,couleur.name());
+        return console_joueur.resquestAMove(p,couleur.name());
     }
 
 }

@@ -20,24 +20,24 @@ public class App {
         int choix_du_joueur_courant;
         IIHM ihm = new IHM();
 
-        Player p1 = ihm.recuperer_type_de_joueur() == Identity.HUMAN? new Human(): new IA(); // imparaire = WHITE
-        Player p2 = ihm.recuperer_type_de_joueur() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
+        Player p1 = ihm.requestPlayerTypr() == Identity.HUMAN? new Human(): new IA(); // imparaire = WHITE
+        Player p2 = ihm.requestPlayerTypr() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
         joueurs.add(p1);
         joueurs.add(p2);
-        ihm.mettre_a_jour_plateau(plateau);
+        ihm.refreshPlateau(plateau);
 
         while (!plateau.isFull()) {
             joueur_courant = get_joueur();
             choix_du_joueur_courant = joueur_courant.getChoice(plateau);
             plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
-            ihm.afficher_le_coup(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
-            ihm.mettre_a_jour_plateau(plateau);
+            ihm.showPlayedPosition(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
+            ihm.refreshPlateau(plateau);
             if (plateau.isWin() == Stat.WHITE) {
-                ihm.afficher_resultat(p1.getPawnColor().name(), p2.getPawnColor().name());
+                ihm.showResult(p1.getPawnColor().name(), p2.getPawnColor().name());
                 return;
             }
             else if (plateau.isWin() == Stat.BLACK) {
-                ihm.afficher_resultat(p2.getPawnColor().name(), p1.getPawnColor().name());
+                ihm.showResult(p2.getPawnColor().name(), p1.getPawnColor().name());
                 return;
             }
         }

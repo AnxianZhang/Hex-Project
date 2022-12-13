@@ -8,18 +8,8 @@ import java.util.Scanner;
 public class IHM implements IIHM {
     private final Scanner sc = new Scanner(System.in);
 
-    /**
-     * Cette méthode permet de proposer à l'utilisateur de choisir le type
-     * de joueur qui va ouer (IA ou humain) et ensuite récupérer cette valeur
-     *
-     * @return retourne un objet humain ou IA de type Identity, ce sera le type du joueur
-     *
-     * @see #afficher_choix_possible()
-     * @see #demander_un_integer(int)
-     * @see Identity#values()
-     */
     @Override
-    public Identity recuperer_type_de_joueur(){
+    public Identity requestPlayerTypr(){
         System.out.println("Choissisez le type du joueur par un numéro" );
         afficher_choix_possible();
 
@@ -42,56 +32,26 @@ public class IHM implements IIHM {
         }
     }
 
-    /**
-     * Cette méthode est une méthode d'affichage. Elle permet d'afficher
-     * à l'utilisateur les résultats de la partie.
-     *
-     * @param gagnant paramètre qui fait référence à un joueur
-     * @param perdant paramètre qui fait référence à un joueur
-     */
     @Override
-    public void afficher_resultat(String gagnant, String perdant){
-        System.out.println("Les " + gagnant + " ont gagner ");
-        System.out.println("Les " + perdant + " ont perdu");
+    public void showResult(String winner, String looser){
+        System.out.println("Les " + winner + " ont gagner ");
+        System.out.println("Les " + looser + " ont perdu");
         System.out.println("La partie est finie");
     }
 
-    /**
-     * Méthode qui permet d'afficher le plateau
-     *
-     * @param p objet plateau
-     */
     @Override
-    public void mettre_a_jour_plateau(Plateau p){
+    public void refreshPlateau(Plateau p){
         System.out.println(p);
     }
 
-    /**
-     * Cette méthode permet d'afficher le coup d'un joueur, où est-ce qu'il a joué ?
-     *
-     * @param player_name la couleur du joueur
-     * @param choix la case où le joueur à joué
-     *
-     */
     @Override
-    public void afficher_le_coup(String player_name, int choix){
-        System.out.println(player_name + " ont jouées à la case " + choix);
+    public void showPlayedPosition(String playerPawnColor, int choice){
+        System.out.println(playerPawnColor + " ont jouées à la case " + choice);
     }
 
-    /**
-     * Cette méthode demande aux joueurs où est-ce qu'ils veulent poser leur pion
-     *
-     * @param p le plateau sur lequelle les joueurs jouent
-     * @param joueur le joueur à qui on demande où il va jouer
-     *
-     * @return retourne un entier entre 0 et la taille du plteau, c'est là case
-     * où le joueur va jouer
-     *
-     * @see Plateau#taille()
-     */
     @Override
-    public int demander_coup_a_jouer(Plateau p, String joueur){
-        System.out.print("C'est au tour des " + joueur +" de jouer sur le plateau: ");
+    public int resquestAMove(Plateau p, String player){
+        System.out.print("C'est au tour des " + player +" de jouer sur le plateau: ");
         return demander_un_integer(p.taille() * p.taille());
     }
 
