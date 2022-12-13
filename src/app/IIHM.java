@@ -53,4 +53,10 @@ public interface IIHM {
      * @return la taille
      */
     int requestPlateauSize();
+
+    /**
+     * Affiche un message prevenant que la case jouer
+     * presente deja un pion
+     */
+    void caseAlreadyUsed(Plateau p);
 }

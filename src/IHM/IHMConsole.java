@@ -24,21 +24,21 @@ public class IHMConsole implements IIHM {
     /**
      * Recupere la valeur de la position où le joueur veut jouer
      *
-     * @param borne_inferieure_inclue debut du plateau
-     * @param borne_superieur fin du plateau
+     * @param maxVal debut du plateau
+     * @param minVal fin du plateau
      *
      * @return retourne un entier qui correspond au choix du joueur
      */
-    private int requestAnInteger(int borne_inferieure_inclue, int borne_superieur){
+    private int requestAnInteger(int maxVal, int minVal){
         while (true) {
             if(!sc.hasNextInt()){
                 System.out.print("Un chiffre est requis, saisissez votre choix :");
                 sc.nextLine();
             }
             else  {
-                int choix = sc.nextInt() ;
-                if (choix < borne_superieur && choix >= borne_inferieure_inclue){
-                    return choix;
+                int choice = sc.nextInt() ;
+                if (choice < minVal && choice >= maxVal){
+                    return choice;
                 }
                 System.out.print("Un nombre valide est requis, saisissez votre choix : ");
                 sc.nextLine();
@@ -51,9 +51,9 @@ public class IHMConsole implements IIHM {
         System.out.println("Choissisez le type du joueur par un numéro" );
         showAllPossibleChoices();
 
-        int choix = requestAnInteger(0,Identity.values().length);
+        int choice = requestAnInteger(0,Identity.values().length);
 
-        return Identity.values()[choix];
+        return Identity.values()[choice];
     }
 
     @Override
@@ -81,7 +81,13 @@ public class IHMConsole implements IIHM {
 
     @Override
     public int requestPlateauSize() {
-        System.out.println("Veuillez indiquer la taille de la largeur du plateau entre 2 et 100 inclus");
+        System.out.print("Veuillez indiquer la taille de la largeur du plateau entre 2 et 100 inclus: ");
         return requestAnInteger(2,51);//taille minimale et maximale de la largeur du plateau
+    }
+
+    @Override
+    public void caseAlreadyUsed(Plateau p) {
+        System.out.println("La case que vous avez donnée contient deja un pion !");
+        System.out.println("Choisisez une case valide.");
     }
 }

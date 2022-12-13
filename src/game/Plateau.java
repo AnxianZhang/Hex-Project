@@ -159,6 +159,7 @@ public class Plateau {
         this.tab[line][column].setChecked(true);
 
         if(pawnsEndPos.contains(pawnPosition)) return true;
+
         if (this.tab[line][column].getStat() != playerPawnColor) return false;
 
         for (int i = -1; i < 2; ++i)
@@ -172,7 +173,9 @@ public class Plateau {
                                 ((line + i) * this.size) + (column + j), sitePos, s, pawnsEndPos);
                     }
             }
+
         if(s.isEmpty()) return false; // rentre dans la condition s'il n'y a plus de case visitable
+
         return checkItForOnePosition(playerPawnColor, s.pop(), sitePos, s, pawnsEndPos);
     }
 
@@ -219,6 +222,7 @@ public class Plateau {
                 pawnsStartPosition.remove(0);
             }
         }
+
         return Stat.EMPTY;
     }
 
@@ -260,6 +264,7 @@ public class Plateau {
     private String stateOfAPosition(int line, int column) {
         if (this.tab[line][column].getStat() == Stat.BLACK) return " B";
         if (this.tab[line][column].getStat() == Stat.WHITE) return " W";
+
         return " .";
     }
 
@@ -284,6 +289,7 @@ public class Plateau {
                 sb.append(stateOfAPosition(i, j));
             sb.append("\n");
         }
+
         return sb.toString();
     }
 }

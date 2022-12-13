@@ -11,47 +11,53 @@ import java.util.ArrayList;
 
 public class App {
     static private final ArrayList<IPlayer> joueurs = new ArrayList<>();
-    static private int compteur_joueur = 0;
+    static private int numPlayer = 0; // numeros du joueur qui doit jouer
+
+    /**
+     * Permet de récupérer le joueur courant
+     *
+     * @return le joueur courrant
+     */
+    static private IPlayer get_joueur(){
+        if (numPlayer >= 2){
+            numPlayer = 0;
+        }
+        int numPlayer = App.numPlayer % joueurs.size();
+        ++App.numPlayer;
+        return joueurs.get(numPlayer);
+    }
+
+
     public static void main(String[] args) {
-        int choix_du_joueur_courant;
+        int currentPlayerChoice;
         IIHM ihm = new IHMConsole();
         Plateau plateau = new Plateau(ihm.requestPlateauSize());
-        IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
-        IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
+        IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN ? new Human() : new IA(); // impaire = WHITE
+        IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN ? new Human() : new IA(); // pair = BLACK
 
         joueurs.add(p1);
         joueurs.add(p2);
 
-        ihm.refreshPlateau(plateau);
         while (!plateau.isFull()) {
-            IPlayer joueur_courant = get_joueur();
+            IPlayer currentPlayer = get_joueur();
 
-            choix_du_joueur_courant = joueur_courant.getChoice(plateau);
-            while( !plateau.isEmpty(choix_du_joueur_courant / plateau.taille() , choix_du_joueur_courant % plateau.taille())){
-                choix_du_joueur_courant = joueur_courant.getChoice(plateau);
+            currentPlayerChoice = currentPlayer.getChoice(plateau);
+            while (!plateau.isEmpty(currentPlayerChoice / plateau.taille(),
+                    currentPlayerChoice % plateau.taille())) {
+                ihm.caseAlreadyUsed(plateau);
+                currentPlayerChoice = currentPlayer.getChoice(plateau);
             }
 
-
-            plateau.play(choix_du_joueur_courant, joueur_courant.getPawnColor());
-            ihm.showPlayedPosition(joueur_courant.getPawnColor().name(),choix_du_joueur_courant);
+            plateau.play(currentPlayerChoice, currentPlayer.getPawnColor());
+            ihm.showPlayedPosition(currentPlayer.getPawnColor().name(), currentPlayerChoice);
             ihm.refreshPlateau(plateau);
             if (plateau.isWin() == Stat.WHITE) {
                 ihm.showResult(p1.getPawnColor().name(), p2.getPawnColor().name());
                 return;
-            }
-            else if (plateau.isWin() == Stat.BLACK) {
+            } else if (plateau.isWin() == Stat.BLACK) {
                 ihm.showResult(p2.getPawnColor().name(), p1.getPawnColor().name());
                 return;
             }
         }
-    }
-
-    static private IPlayer get_joueur(){
-        if (compteur_joueur >= 2){
-            compteur_joueur = 0;
-        }
-        int numPlayer = compteur_joueur % joueurs.size();
-        ++compteur_joueur;
-        return joueurs.get(numPlayer);
     }
 }
