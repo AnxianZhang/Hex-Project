@@ -45,6 +45,8 @@ public class App {
         joueurs.add(p1);
         joueurs.add(p2);
 
+        ihm.refreshPlateau(plateau);
+
         while (!plateau.isFull()) {
             IPlayer currentPlayer = get_joueur();
 
