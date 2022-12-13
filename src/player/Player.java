@@ -1,10 +1,10 @@
 package player;
 
 import Provider.MoveProvider;
-import game.Plateau;
+import app.IPlayer;
 import game.Stat;
 
-public abstract class Player{
+public abstract class Player implements IPlayer {
     protected MoveProvider provider = new MoveProvider();
     private static boolean isFirstColor = true;
     protected final Stat pawnColor;
@@ -20,19 +20,7 @@ public abstract class Player{
         }
     }
 
-    /**
-     * Indique la couleur du pion
-     *
-     * @return la couleur du pion (WHITE,BLACK)
-     */
     public Stat getPawnColor(){
         return this.pawnColor;
     }
-
-    /**
-     * Indique le choix du joueur
-     *
-     * @return retourne son choix
-     */
-    public abstract int getChoice(Plateau p) ;
 }

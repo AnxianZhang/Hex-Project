@@ -6,22 +6,21 @@ import game.Stat;
 import player.Human;
 import player.IA;
 import player.Identity;
-import player.Player;
 
 import java.util.ArrayList;
 
 public class App {
     static final int TAILLE_JEU = 4;
     static Plateau plateau = new Plateau(TAILLE_JEU);
-    static ArrayList<Player> joueurs = new ArrayList<>();
-    static Player joueur_courant;
+    static ArrayList<IPlayer> joueurs = new ArrayList<>();
+    static IPlayer joueur_courant;
     static private int compteur_joueur = 0;
     public static void main(String[] args) {
         int choix_du_joueur_courant;
         IIHM ihm = new IHM();
 
-        Player p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
-        Player p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
+        IPlayer p1 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // impaire = WHITE
+        IPlayer p2 = ihm.requestPlayerType() == Identity.HUMAN? new Human(): new IA(); // pair = BLACK
         joueurs.add(p1);
         joueurs.add(p2);
         ihm.refreshPlateau(plateau);
@@ -43,7 +42,7 @@ public class App {
         }
     }
 
-    static private Player get_joueur(){
+    static private IPlayer get_joueur(){
         if (compteur_joueur >= 2){
             compteur_joueur = 0;
         }
