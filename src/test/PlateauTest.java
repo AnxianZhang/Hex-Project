@@ -29,28 +29,22 @@ public class PlateauTest {
 
         assertFalse(p.isFull());
 
-        assertEquals(
-                """
-                         A B C D
-                        1 . . . .
-                        2  . . . .
-                        3   . . . .
-                        4    . . . .
-                        """, p.toString());
+        assertEquals(" A B C D\n" +
+                     "1 . . . .\n" +
+                     "2  . . . .\n" +
+                     "3   . . . .\n" +
+                     "4    . . . .\n", p.toString());
 
         p.play(0, Stat.WHITE);
         p.play(6, Stat.BLACK);
 
         assertEquals(nbCases - 2, p.getNbOfUsableCase());
 
-        assertEquals(
-                """
-                         A B C D
-                        1 W . . .
-                        2  . . B .
-                        3   . . . .
-                        4    . . . .
-                        """, p.toString());
+        assertEquals(" A B C D\n" +
+                "1 W . . .\n" +
+                "2  . . B .\n" +
+                "3   . . . .\n" +
+                "4    . . . .\n", p.toString());
 
         p.play(1, Stat.WHITE);
         p.play(2, Stat.BLACK);
@@ -69,14 +63,11 @@ public class PlateauTest {
 
         assertTrue(p.isFull());
 
-        assertEquals(
-                """
-                         A B C D
-                        1 W W B W
-                        2  B W B B
-                        3   W B W B
-                        4    W B W B
-                        """, p.toString());
+        assertEquals(" A B C D\n" +
+                    "1 W W B W\n" +
+                    "2  B W B B\n" +
+                    "3   W B W B\n" +
+                    "4    W B W B\n", p.toString());
     }
 
     /**
