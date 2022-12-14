@@ -252,7 +252,10 @@ public class Plateau {
      * @return retourne des espaces dans une chaine de caractere
      */
     private String makeSpace(int numLine) {
-        return " ".repeat(Math.max(0, numLine - 1));
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < numLine - 1; ++i)
+            sb.append(" ");
+        return sb.toString();
     }
 
     /**
