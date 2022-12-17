@@ -104,6 +104,30 @@ public class PlateauTest {
         assertEquals(Stat.EMPTY, p.isWin());
         p.play(3, Stat.WHITE);
         assertEquals(Stat.WHITE, p.isWin()); // les pions WHITE on gagne !
+        p.play(4,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(5,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(6,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(7,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(8,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(9,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(10,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(11,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(12,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(13,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(14,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());
+        p.play(15,Stat.WHITE);
+        assertEquals(Stat.WHITE, p.isWin());//WHITE ds tte la plateau
 
         Plateau pp=new Plateau(5);
         pp.play(0, Stat.BLACK);
@@ -131,11 +155,12 @@ public class PlateauTest {
         pt.play(3,Stat.WHITE);
         assertEquals(Stat.EMPTY, pt.isWin());
         pt.play(12,Stat.BLACK);
-        assertEquals(Stat.BLACK, pt.isWin());
+        assertEquals(Stat.BLACK, pt.isWin());// les pions BLACK on gagne !
         assertThrows(Unplayable.class, () -> {
             pt.play(0,Stat.WHITE);
         });
-        assertEquals(Stat.BLACK, pt.isWin());
+        pt.play(5,Stat.WHITE);//apres BLACK gagne, WHITE play
+        assertEquals(Stat.BLACK, pt.isWin());//tjr BLACK gagne !
 
     }
 }
