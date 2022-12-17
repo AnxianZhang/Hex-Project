@@ -87,14 +87,17 @@ public class PlateauTest {
     }
 
     /**
-     * tests de la methode isWin couvrant la victoire des
-     * pions WHITE et BLACK
+     * tests de la methode isWin sur un plateau qui contient que des
+     * pions d'une seul couleur
+     * /!\ --> ce cas est impossible en temps reel, mais il faut la
+     *         tester afin d'assurer le bon fonctionement de la
+     *         fonction
      * 
      * @see Plateau#play(int, Stat) 
      * @see Plateau#isWin() 
      */
     @Test
-    public void testIsWin(){
+    public void testIsWinForOneColorOnAllCases(){
         Plateau p = new Plateau(4);
         p.play(0, Stat.WHITE);
         assertEquals(Stat.EMPTY, p.isWin());
@@ -127,9 +130,18 @@ public class PlateauTest {
         p.play(14,Stat.WHITE);
         assertEquals(Stat.WHITE, p.isWin());
         p.play(15,Stat.WHITE);
-        assertEquals(Stat.WHITE, p.isWin());//WHITE ds tte la plateau
+        assertEquals(Stat.WHITE, p.isWin());//WHITE ds tte le plateau
+    }
 
-        Plateau pp=new Plateau(5);
+    /**
+     * Test de la fonction sur une couleur de pion
+     *
+     * @see Plateau#play(int, Stat)
+     * @see Plateau#isWin()
+     */
+    @Test
+    public void testIsWinForBLACK(){
+        Plateau pp = new Plateau(5);
         pp.play(0, Stat.BLACK);
         assertEquals(Stat.EMPTY, pp.isWin());
         pp.play(5, Stat.BLACK);
@@ -140,8 +152,17 @@ public class PlateauTest {
         assertEquals(Stat.EMPTY, pp.isWin());
         pp.play(20, Stat.BLACK);
         assertEquals(Stat.BLACK, pp.isWin());// les pions BLACK on gagne !
+    }
 
-        Plateau pt=new Plateau(4);
+    /**
+     * Test de isWin sur une partie
+     *
+     * @see Plateau#play(int, Stat)
+     * @see Plateau#isWin()
+     */
+    @Test
+    public void testIsWinForOneGame(){
+        Plateau pt = new Plateau(4);
         pt.play(0, Stat.BLACK);
         assertEquals(Stat.EMPTY, pt.isWin());
         pt.play(1,Stat.WHITE);
@@ -156,11 +177,11 @@ public class PlateauTest {
         assertEquals(Stat.EMPTY, pt.isWin());
         pt.play(12,Stat.BLACK);
         assertEquals(Stat.BLACK, pt.isWin());// les pions BLACK on gagne !
-        assertThrows(Unplayable.class, () -> {
-            pt.play(0,Stat.WHITE);
-        });
-        pt.play(5,Stat.WHITE);//apres BLACK gagne, WHITE play
-        assertEquals(Stat.BLACK, pt.isWin());//tjr BLACK gagne !
 
+        assertThrows(Unplayable.class, () -> pt.play(0,Stat.WHITE));
+
+        // apres que BLACK ont gagne, WHITE play (cas impossible mais faut le tester !)
+        pt.play(5,Stat.WHITE);
+        assertEquals(Stat.BLACK, pt.isWin());//tjr BLACK gagne !
     }
 }
