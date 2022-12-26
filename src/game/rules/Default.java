@@ -10,20 +10,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
+/**
+ * Brief: Classe Default permet d'obtenir les
+ * regle par default du jeu de hex
+ * @author Anxian ZHANG, Nathan COLLOMBET,
+ *         Xingtong LIN, Redouane OUASTI
+ * @version 2
+ * @since 13/12/2022
+ */
 public class Default implements Rule {
-    /**
-     * Permet de jouer sur une case en fonction du joueur, elle renvoie
-     * argument exception si la case choisie n'est pas jouable.
-     *
-     * @param p le plateau
-     * @param numCase cela indique sur quelle case le joueur va jouer
-     * @param s indique quel joueur joue avec la couleur de son pion WHITE OU BLACK.
-     *
-     * @throws Unplayable lorsque le joueur joue sur une case non jouable
-     *
-     * @see Case#play(Stat)
-     * @see Plateau#isEmpty(int, int)
-     */
     public void play(Plateau p, int numCase ,Stat s) throws Unplayable{
         int line = numCase / p.taille();
         int column = numCase % p.taille();
@@ -106,7 +101,7 @@ public class Default implements Rule {
             Stack<Integer> s, ArrayList<Integer> pawnsEndPos, Plateau p){
         int line = pawnPosition / p.taille();
         int column = pawnPosition % p.taille();
-//        System.out.println(pawnPosition);
+
         p.setCheckedAt(line, column, true);
 
         if(pawnsEndPos.contains(pawnPosition)) return true;
@@ -144,18 +139,6 @@ public class Default implements Rule {
                 p.setCheckedAt(i, j, false);
     }
 
-    /**
-     * Indique si un joueur et gagnant ou pas pour chaque case de debut
-     *
-     * @param p plateau dans le quel recherche s'il y a un gagnant
-     *
-     * @return retourne le joueur gagnant, si aucun ne l'est return EMPTY
-     *
-     * @see #getPawnsStartPositions(Plateau, Stat)
-     * @see Plateau#isEmpty(int, int)
-     * @see #checkItForOnePosition(Stat, int, ArrayList, Stack, ArrayList, Plateau)
-     * @see #remettreToutFalse(Plateau)
-     */
     public Stat winner(Plateau p){
         for (int i = 0; i < Stat.values().length - 1; i++) {
             Stack<Integer> caseStillCheckable = new Stack<>();
