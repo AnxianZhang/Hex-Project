@@ -1,6 +1,7 @@
-package Provider;
+package player;
 
 import IHM.IHMConsole;
+import app.IIHM;
 import game.Plateau;
 import game.Stat;
 
@@ -14,7 +15,11 @@ import java.util.Random;
  * @since 13/12/2022
  */
 public class MoveProvider {
-    protected IHMConsole playerConsole = new IHMConsole();
+    protected IIHM playerConsole;
+
+    protected MoveProvider(){
+        this.playerConsole = new IHMConsole();
+    }
 
     /**
      * Generation du coup de l'IA un fonction des coses

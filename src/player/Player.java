@@ -1,6 +1,5 @@
 package player;
 
-import Provider.MoveProvider;
 import app.IPlayer;
 import game.Stat;
 
@@ -13,11 +12,12 @@ import game.Stat;
  * @since 13/12/2022
  */
 public abstract class Player implements IPlayer {
-    protected MoveProvider provider = new MoveProvider();
+    protected MoveProvider provider;
     private static boolean isFirstColor = true;
     protected final Stat pawnColor;
 
     public Player() {
+        this.provider = new MoveProvider();
         if(isFirstColor){
             this.pawnColor = Stat.WHITE;
             isFirstColor = false;

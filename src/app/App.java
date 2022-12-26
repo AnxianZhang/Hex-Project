@@ -60,10 +60,10 @@ public class App {
             plateau.play(currentPlayerChoice, currentPlayer.getPawnColor());
             ihm.showPlayedPosition(currentPlayer.getPawnColor().name(), currentPlayerChoice);
             ihm.refreshPlateau(plateau);
-            if (plateau.isWin() == Stat.WHITE) {
+            if (plateau.winner() == Stat.WHITE) {
                 ihm.showResult(p1.getPawnColor().name(), p2.getPawnColor().name());
                 return;
-            } else if (plateau.isWin() == Stat.BLACK) {
+            } else if (plateau.winner() == Stat.BLACK) {
                 ihm.showResult(p2.getPawnColor().name(), p1.getPawnColor().name());
                 return;
             }
