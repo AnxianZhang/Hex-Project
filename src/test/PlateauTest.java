@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import exeption.Unplayable;
+import game.rules.Unplayable;
 import game.Plateau;
 import game.Stat;
 

@@ -1,6 +1,6 @@
 package game;
 
-import exeption.Unplayable;
+import game.rules.Unplayable;
 
 /**
  * Brief: Interfacte Rule permettant de crer des

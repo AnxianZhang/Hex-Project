@@ -1,6 +1,5 @@
 package game.rules;
 
-import exeption.Unplayable;
 import game.Case;
 import game.Plateau;
 import game.Rule;
@@ -15,19 +14,10 @@ import java.util.Stack;
  * regle par default du jeu de hex
  * @author Anxian ZHANG, Nathan COLLOMBET,
  *         Xingtong LIN, Redouane OUASTI
- * @version 2
- * @since 13/12/2022
+ * @version 3
+ * @since 28/12/2022
  */
 public class Default implements Rule {
-    public void play(Plateau p, int numCase ,Stat s) throws Unplayable{
-        int line = numCase / p.taille();
-        int column = numCase % p.taille();
-        if (numCase < 0 || numCase >= Math.pow( p.taille(), 2) || !p.isEmpty(line, column))
-            throw new Unplayable();
-
-        p.playOnCase(line ,column, s);
-    }
-
     /**
      * Remplis une liste avec les cases de la première
      * ligne ou colonne du plateau en fonction des couleurs des cases.
@@ -137,6 +127,15 @@ public class Default implements Rule {
         for (int i = 0; i < p.taille(); ++i)
             for (int j = 0; j < p.taille(); ++j)
                 p.setCheckedAt(i, j, false);
+    }
+
+    public void play(Plateau p, int numCase ,Stat s) throws Unplayable{
+        int line = numCase / p.taille();
+        int column = numCase % p.taille();
+        if (numCase < 0 || numCase >= Math.pow( p.taille(), 2) || !p.isEmpty(line, column))
+            throw new Unplayable();
+
+        p.playOnCase(line ,column, s);
     }
 
     public Stat winner(Plateau p){
