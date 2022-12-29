@@ -1,7 +1,6 @@
 package game;
 
 import game.rules.Default;
-import game.rules.Unplayable;
 
 /**
  * Brief: Classe Plateau permettan de creer une

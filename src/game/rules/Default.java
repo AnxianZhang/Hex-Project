@@ -1,9 +1,6 @@
 package game.rules;
 
-import game.Case;
-import game.Plateau;
-import game.Rule;
-import game.Stat;
+import game.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,7 +126,7 @@ public class Default implements Rule {
                 p.setCheckedAt(i, j, false);
     }
 
-    public void play(Plateau p, int numCase ,Stat s) throws Unplayable{
+    public void play(Plateau p, int numCase ,Stat s) throws Unplayable {
         int line = numCase / p.taille();
         int column = numCase % p.taille();
         if (numCase < 0 || numCase >= Math.pow( p.taille(), 2) || !p.isEmpty(line, column))

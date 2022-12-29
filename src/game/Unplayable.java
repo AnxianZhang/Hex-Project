@@ -1,4 +1,4 @@
-package game.rules;
+package game;
 
 public class Unplayable extends IllegalArgumentException{
 }

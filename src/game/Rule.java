@@ -1,7 +1,5 @@
 package game;
 
-import game.rules.Unplayable;
-
 /**
  * Brief: Interfacte Rule permettant de crer des
  * des regles differentes
