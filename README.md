@@ -13,14 +13,4 @@ Si vous voulez obtenir plus d'informations concernant les difficultés que nous 
 Pour jouer au jeu, il sufit de cloner le répertaire et de lancer le main.
 
 ### Résultats
-choisir la taille du plateau
-![](https://github.com/AnxianZhang/Hex-Project-201-202/raw/main/results_show/1etape.png)
-
-indiquer player 1 est humain ou IA
-![](https://github.com/AnxianZhang/Hex-Project-201-202/raw/main/results_show/player1choix.png)
-
-pareil pour player 2
-![](https://github.com/AnxianZhang/Hex-Project-201-202/raw/main/results_show/player2choix.png)
-
-commencer à jouer
-![](https://github.com/AnxianZhang/Hex-Project-201-202/raw/main/results_show/play.png)
+[quelques photos](https://docs.google.com/document/d/1n0uzBoLslqfDOEXgFNslFlaw4I3gpF0Ph1V2gGevfDo/edit?usp=sharing)
